@@ -62,17 +62,17 @@ describe('Line', function() {
     });
   });
 
-  describe('isParrallel', function() {
-    it('isParrellel method should give true when given lines are parallel', function() {
+  describe('isParallel', function() {
+    it('isParallel method should give true when given lines are parallel', function() {
       const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
       const line2 = new Line({ x: 0, y: 0 }, { x: 5, y: 10 });
-      assert.ok(line1.isParrellel(line2));
+      assert.ok(line1.isParallel(line2));
     });
 
-    it('isParrellel method should give false when given lines are not parallel', function() {
+    it('isParallel method should give false when given lines are not parallel', function() {
       const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
       const line2 = new Line({ x: 0, y: 1 }, { x: 5, y: 10 });
-      assert.isNotOk(line1.isParrellel(line2));
+      assert.isNotOk(line1.isParallel(line2));
     });
   });
 });

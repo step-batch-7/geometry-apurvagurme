@@ -26,11 +26,8 @@ class Line {
     return diffOfYCoordinate / diffOfXCoordinate;
   }
 
-  isParrellel(other) {
-    if (this.slope == other.slope) {
-      return true;
-    }
-    return false;
+  isParallel(other) {
+    return this.slope == other.slope;
   }
 
   isEqualTo(other) {
