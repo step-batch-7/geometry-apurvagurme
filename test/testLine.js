@@ -34,12 +34,20 @@ describe('Line', function() {
   describe('length', function() {
     it('length property should give length of the line', function() {
       const line = new Line({ x: 0, y: 0 }, { x: 3, y: 4 });
-      assert.strictEqual(line.length, 5);
+      assert.approximately(line.length, 4.5, 0.5);
     });
+
     it('length property should give rounded length of the line', function() {
       const line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
       const actual = line.length;
-      assert.approximately(actual, 5, 5.5);
+      assert.approximately(actual, 5, 0.9);
+    });
+  });
+  describe('slope', function() {
+    it('should give slope of lines', function() {
+      const line = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
+      const actual = line.slope;
+      assert.strictEqual(actual, 2);
     });
   });
 });

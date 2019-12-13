@@ -18,8 +18,14 @@ class Line {
     const diffOfXCoordinate =
       (this.endB.x - this.endA.x) * (this.endB.x - this.endA.x);
     const diffOfYCoordinate =
-      (this.endB.y - this.endA.y) * (this.endB.y - this.endA.y);
+      (this.endB.x - this.endA.x) * (this.endB.y - this.endA.y);
     return Math.sqrt(diffOfXCoordinate + diffOfYCoordinate);
+  }
+
+  get slope() {
+    const diffOfXCoordinate = this.endB.x - this.endA.x;
+    const diffOfYCoordinate = this.endB.y - this.endA.y;
+    return diffOfYCoordinate / diffOfXCoordinate;
   }
 
   isEqualTo(other) {
