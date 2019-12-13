@@ -12,19 +12,19 @@ describe('Line', function() {
   });
 
   describe('isEqualTo', function() {
-    it('isEqualTo method should give whether a line is equal to another line', function() {
+    it('should validate when a line is equal to another line', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       const line2 = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       assert.ok(line1.isEqualTo(line2));
     });
 
-    it('isEqualTo method should give false when one single point of a line is different', function() {
+    it('should invalidate when one single point of a line is different', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       const line2 = new Line({ x: 1, y: 2 }, { x: 3, y: 5 });
       assert.isNotOk(line1.isEqualTo(line2));
     });
 
-    it('isEqualTo method should give false when the other line is not instance of the same Line class', function() {
+    it('should invalidate when the other line is not instance of the same Line class', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       const line2 = 'not a line';
       assert.isNotOk(line1.isEqualTo(line2));
@@ -39,16 +39,14 @@ describe('Line', function() {
 
     it('length property should give rounded length of the line', function() {
       const line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
-      const actual = line.length;
-      assert.approximately(actual, 5, 0.9);
+      assert.approximately(line.length, 5, 0.9);
     });
   });
 
   describe('slope', function() {
     it('should give slope of lines', function() {
       const line = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
-      const actual = line.slope;
-      assert.strictEqual(actual, 2);
+      assert.strictEqual(line.slope, 2);
     });
 
     it('should give slope of line as zero when the given line is parallel to X-axis', function() {
@@ -69,10 +67,22 @@ describe('Line', function() {
       assert.ok(line1.isParallel(line2));
     });
 
-    it('isParallel method should give false when given lines are not parallel', function() {
+    it('should invalidate if given lines are not parallel', function() {
       const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
       const line2 = new Line({ x: 0, y: 1 }, { x: 5, y: 10 });
       assert.isNotOk(line1.isParallel(line2));
     });
+  });
+
+  it('isParallel method should give false when given lines are same', function() {
+    const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
+    const line2 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
+    assert.ok(line1.isParallel(line2));
+  });
+
+  it('isParallel method should give false when other line is not an instance of Line class', function() {
+    const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
+    const line2 = 'not a line';
+    assert.isNotOk(line1.isParallel(line2));
   });
 });
