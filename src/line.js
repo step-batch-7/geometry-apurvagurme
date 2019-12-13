@@ -3,9 +3,9 @@ const arePointsEqual = function(a, b) {
 };
 
 class Line {
-  constructor(x1, y1, x2, y2) {
-    this.endA = { x: x1, y: y1 };
-    this.endB = { x: x2, y: y2 };
+  constructor(point1, point2) {
+    this.endA = { x: point1.x, y: point1.y };
+    this.endB = { x: point2.x, y: point2.y };
   }
 
   toString() {
