@@ -15,15 +15,13 @@ class Line {
   }
 
   get length() {
-    const sqrOfDiffOfXCoordinates = Math.pow(this.endB.x - this.endA.x, 2);
-    const sqrOfDiffOfYCoordinates = Math.pow(this.endB.x - this.endA.x, 2);
-    return Math.sqrt(sqrOfDiffOfXCoordinates + sqrOfDiffOfYCoordinates);
+    const differenceOfXs = this.endB.x - this.endA.x;
+    const differenceOfYs = this.endB.x - this.endA.x;
+    return Math.sqrt(differenceOfXs ** 2 + differenceOfYs ** 2);
   }
 
   get slope() {
-    const diffOfXCoordinate = this.endB.x - this.endA.x;
-    const diffOfYCoordinate = this.endB.y - this.endA.y;
-    return diffOfYCoordinate / diffOfXCoordinate;
+    return (this.endB.y - this.endA.y) / (this.endB.x - this.endA.x);
   }
 
   isParallel(other) {
