@@ -10,6 +10,7 @@ describe('Line', function() {
       assert.strictEqual(actual, expected);
     });
   });
+
   describe('isEqualTo', function() {
     it('isEqualTo method should give whether a line is equal to another line', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
@@ -27,6 +28,13 @@ describe('Line', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       const line2 = 'not a line';
       assert.isNotOk(line1.isEqualTo(line2));
+    });
+  });
+
+  describe('length', function() {
+    it('length property should give length of the line', function() {
+      const line = new Line({ x: 0, y: 0 }, { x: 3, y: 4 });
+      assert.strictEqual(line.length, 5);
     });
   });
 });

@@ -14,6 +14,14 @@ class Line {
     return `Line ${endA}-----${endB}`;
   }
 
+  get length() {
+    const diffOfXCoordinate =
+      (this.endB.x - this.endA.x) * (this.endB.x - this.endA.x);
+    const diffOfYCoordinate =
+      (this.endB.y - this.endA.y) * (this.endB.y - this.endA.y);
+    return Math.sqrt(diffOfXCoordinate + diffOfYCoordinate);
+  }
+
   isEqualTo(other) {
     if (other instanceof Line) {
       return (
