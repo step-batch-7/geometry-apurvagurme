@@ -50,10 +50,12 @@ describe('Line', function() {
       const actual = line.slope;
       assert.strictEqual(actual, 2);
     });
+
     it('should give slope of line as zero when the given line is parallel to X-axis', function() {
       const line = new Line({ x: 0, y: 0 }, { x: 4, y: 0 });
       assert.strictEqual(line.slope, 0);
     });
+
     it('should give slope of line as Infinity when the given line is parallel to Y-axis', function() {
       const line = new Line({ x: 0, y: 2 }, { x: 0, y: 3 });
       assert.strictEqual(line.slope, Infinity);
