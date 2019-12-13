@@ -36,5 +36,10 @@ describe('Line', function() {
       const line = new Line({ x: 0, y: 0 }, { x: 3, y: 4 });
       assert.strictEqual(line.length, 5);
     });
+    it('length property should give rounded length of the line', function() {
+      const line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
+      const actual = line.length;
+      assert.approximately(actual, 5, 5.5);
+    });
   });
 });
