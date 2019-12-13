@@ -27,13 +27,3 @@ describe('Line', function() {
     });
   });
 });
-
-describe('arePointsEqual', function() {
-  it('should give true value if every points are equal', function() {
-    const current = { endA: { x: 1, y: 2 }, endB: { x: 3, y: 4 } };
-    const other = { endA: { x: 1, y: 2 }, endB: { x: 3, y: 4 } };
-    const expected = true;
-    const actual = arePointsEqual(current, other);
-    assert.strictEqual(actual, expected);
-  });
-});

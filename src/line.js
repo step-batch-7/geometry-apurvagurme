@@ -1,10 +1,5 @@
-const arePointsEqual = function(current, other) {
-  return (
-    current.endA.x == other.endA.x &&
-    current.endA.y == other.endA.y &&
-    current.endB.y == other.endB.y &&
-    current.endB.x == other.endB.x
-  );
+const arePointsEqual = function(a, b) {
+  return a.x === b.x && a.y === b.y;
 };
 
 class Line {
@@ -18,7 +13,10 @@ class Line {
   }
 
   isEqualTo(other) {
-    return arePointsEqual(this, other);
+    return (
+      arePointsEqual(this.endA, other.endA) &&
+      arePointsEqual(this.endB, other.endB)
+    );
   }
 }
 
