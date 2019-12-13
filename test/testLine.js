@@ -50,21 +50,27 @@ describe('Line', function() {
       const actual = line.slope;
       assert.strictEqual(actual, 2);
     });
+    it('should give slope of line as zero when the given line is parallel to X-axis', function() {
+      const line = new Line({ x: 0, y: 0 }, { x: 4, y: 0 });
+      assert.strictEqual(line.slope, 0);
+    });
+    it('should give slope of line as Infinity when the given line is parallel to Y-axis', function() {
+      const line = new Line({ x: 0, y: 2 }, { x: 0, y: 3 });
+      assert.strictEqual(line.slope, Infinity);
+    });
   });
 
   describe('isParrallel', function() {
     it('isParrellel method should give true when given lines are parallel', function() {
       const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
       const line2 = new Line({ x: 0, y: 0 }, { x: 5, y: 10 });
-      const actual = line1.isParrellel(line2);
-      assert.strictEqual(actual, true);
+      assert.ok(line1.isParrellel(line2));
     });
 
-    it('isParrellel method should give true when given lines are parallel', function() {
+    it('isParrellel method should give false when given lines are not parallel', function() {
       const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
       const line2 = new Line({ x: 0, y: 1 }, { x: 5, y: 10 });
-      const actual = line1.isParrellel(line2);
-      assert.strictEqual(actual, false);
+      assert.isNotOk(line1.isParrellel(line2));
     });
   });
 });
