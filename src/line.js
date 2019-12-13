@@ -27,6 +27,12 @@ class Line {
     const diffOfYCoordinate = this.endB.y - this.endA.y;
     return diffOfYCoordinate / diffOfXCoordinate;
   }
+  isParrellel(other) {
+    if (this.slope == other.slope) {
+      return true;
+    }
+    return false;
+  }
 
   isEqualTo(other) {
     if (other instanceof Line) {
