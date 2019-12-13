@@ -9,7 +9,9 @@ class Line {
   }
 
   toString() {
-    return `Line (${this.endA.x},${this.endA.y})-----(${this.endB.x},${this.endB.y})`;
+    const endA = `(${this.endA.x},${this.endA.y})`;
+    const endB = `(${this.endB.x},${this.endB.y})`;
+    return `Line ${endA}-----${endB}`;
   }
 
   isEqualTo(other) {
