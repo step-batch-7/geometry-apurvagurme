@@ -15,11 +15,11 @@ class Line {
   }
 
   get length() {
-    const diffOfXCoordinate =
+    const sqrOfDiffOfXCoordinates =
       (this.endB.x - this.endA.x) * (this.endB.x - this.endA.x);
-    const diffOfYCoordinate =
+    const sqrOfDiffOfYCoordinates =
       (this.endB.x - this.endA.x) * (this.endB.y - this.endA.y);
-    return Math.sqrt(diffOfXCoordinate + diffOfYCoordinate);
+    return Math.sqrt(sqrOfDiffOfXCoordinates + sqrOfDiffOfYCoordinates);
   }
 
   get slope() {
