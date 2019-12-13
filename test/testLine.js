@@ -16,11 +16,13 @@ describe('Line', function() {
       const line2 = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       assert.ok(line1.isEqualTo(line2));
     });
+
     it('isEqualTo method should give false when one single point of a line is different', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       const line2 = new Line({ x: 1, y: 2 }, { x: 3, y: 5 });
       assert.isNotOk(line1.isEqualTo(line2));
     });
+
     it('isEqualTo method should give false when the other line is not instance of the same Line class', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       const line2 = 'not a line';
