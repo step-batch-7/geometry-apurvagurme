@@ -21,4 +21,4 @@ class Line {
   }
 }
 
-module.exports = { Line, arePointsEqual };
+module.exports = Line;

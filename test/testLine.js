@@ -1,36 +1,30 @@
-const { Line, arePointsEqual } = require('../src/line');
+const Line = require('../src/line');
 const assert = require('assert');
 
 describe('Line', function() {
   describe('toString', function() {
     it('toString method should give the string representation of line object', function() {
-      const a = new Line(1, 1, 4, 3);
-      let expected = 'Line (1,1)-----(4,3)';
-      let actual = a.toString();
+      const line1 = new Line(1, 1, 4, 3);
+      const expected = 'Line (1,1)-----(4,3)';
+      const actual = line1.toString();
       assert.strictEqual(actual, expected);
     });
   });
   describe('isEqualTo', function() {
     it('isEqualTo method should give whether a line is equal to another line', function() {
-      const a = new Line(1, 1, 4, 3);
-      const b = new Line(1, 1, 4, 3);
-      let actual = a.isEqualTo(b);
-      let expected = true;
-      assert.strictEqual(actual, expected);
+      const line1 = new Line(1, 1, 4, 3);
+      const line2 = new Line(1, 1, 4, 3);
+      assert.ok(line1.isEqualTo(line2));
     });
     it('isEqualTo method should give false when one single point of a line is different', function() {
-      const a = new Line(1, 2, 3, 4);
-      const b = new Line(1, 2, 3, 5);
-      let actual = a.isEqualTo(b);
-      let expected = false;
-      assert.strictEqual(actual, expected);
+      const line1 = new Line(1, 2, 3, 4);
+      const line2 = new Line(1, 2, 3, 5);
+      assert.ok(!line1.isEqualTo(line2));
     });
     it('isEqualTo method should give false when the other line is not instance of the same Line class', function() {
-      const a = new Line(1, 2, 3, 4);
-      const b = '';
-      let actual = a.isEqualTo(b);
-      let expected = false;
-      assert.strictEqual(actual, expected);
+      const line1 = new Line(1, 2, 3, 4);
+      const line2 = 'not a line';
+      assert.ok(!line1.isEqualTo(line2));
     });
   });
 });
