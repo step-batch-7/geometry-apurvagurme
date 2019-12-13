@@ -14,10 +14,20 @@ class Line {
     return `Line ${endA}-----${endB}`;
   }
 
+  isEqualTo(other) {
+    if (other instanceof Line) {
+      return (
+        arePointsEqual(this.endA, other.endA) &&
+        arePointsEqual(this.endB, other.endB)
+      );
+    }
+    return false;
+  }
+
   get length() {
     const differenceOfXs = this.endB.x - this.endA.x;
-    const differenceOfYs = this.endB.x - this.endA.x;
-    return Math.sqrt(differenceOfXs ** 2 + differenceOfYs ** 2);
+    const differenceOfYs = this.endB.y - this.endA.y;
+    return Math.hypot(differenceOfXs, differenceOfYs);
   }
 
   get slope() {
@@ -27,16 +37,6 @@ class Line {
   isParallel(other) {
     if (other === this) return false;
     return other instanceof Line && this.slope == other.slope;
-  }
-
-  isEqualTo(other) {
-    if (other instanceof Line) {
-      return (
-        arePointsEqual(this.endA, other.endA) &&
-        arePointsEqual(this.endB, other.endB)
-      );
-    }
-    return false;
   }
 }
 

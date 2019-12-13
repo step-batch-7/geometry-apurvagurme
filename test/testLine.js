@@ -3,7 +3,7 @@ const { assert } = require('chai');
 
 describe('Line', function() {
   describe('toString', function() {
-    it('toString method should give the string representation of line object', function() {
+    it('should give the string representation of line object', function() {
       const line1 = new Line({ x: 1, y: 1 }, { x: 4, y: 3 });
       const expected = 'Line (1,1)-----(4,3)';
       const actual = line1.toString();
@@ -32,14 +32,24 @@ describe('Line', function() {
   });
 
   describe('length', function() {
-    it('length property should give length of the line', function() {
+    it('should give length of the line for positive points', function() {
       const line = new Line({ x: 0, y: 0 }, { x: 3, y: 4 });
       assert.approximately(line.length, 4.5, 0.5);
     });
 
-    it('length property should give rounded length of the line', function() {
+    it('should give zero if the points are same', function() {
+      const line = new Line({ x: 4, y: 4 }, { x: 4, y: 4 });
+      assert.strictEqual(line.length, 0);
+    });
+
+    it('should give length of the line in floating points', function() {
       const line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
       assert.approximately(line.length, 5, 0.9);
+    });
+
+    it('should give length of the line for negative points', function() {
+      const line = new Line({ x: -1, y: -2 }, { x: 2, y: 2 });
+      assert.strictEqual(line.length, 5);
     });
   });
 
@@ -61,7 +71,7 @@ describe('Line', function() {
   });
 
   describe('isParallel', function() {
-    it('isParallel method should give true when given lines are parallel', function() {
+    it('should validate when given lines are parallel', function() {
       const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
       const line2 = new Line({ x: 0, y: 0 }, { x: 5, y: 10 });
       assert.ok(line1.isParallel(line2));
@@ -72,17 +82,17 @@ describe('Line', function() {
       const line2 = new Line({ x: 0, y: 1 }, { x: 5, y: 10 });
       assert.isNotOk(line1.isParallel(line2));
     });
-  });
 
-  it('isParallel method should give false when given lines are same', function() {
-    const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
-    const line2 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
-    assert.ok(line1.isParallel(line2));
-  });
+    it('isParallel method should give false when given lines are equal', function() {
+      const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
+      const line2 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
+      assert.ok(line1.isParallel(line2));
+    });
 
-  it('isParallel method should give false when other line is not an instance of Line class', function() {
-    const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
-    const line2 = 'not a line';
-    assert.isNotOk(line1.isParallel(line2));
+    it('should invalidate when other line is not an instance of Line class', function() {
+      const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
+      const line2 = 'not a line';
+      assert.isNotOk(line1.isParallel(line2));
+    });
   });
 });
