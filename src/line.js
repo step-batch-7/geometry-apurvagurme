@@ -15,10 +15,8 @@ class Line {
   }
 
   get length() {
-    const sqrOfDiffOfXCoordinates =
-      (this.endB.x - this.endA.x) * (this.endB.x - this.endA.x);
-    const sqrOfDiffOfYCoordinates =
-      (this.endB.x - this.endA.x) * (this.endB.y - this.endA.y);
+    const sqrOfDiffOfXCoordinates = Math.pow(this.endB.x - this.endA.x, 2);
+    const sqrOfDiffOfYCoordinates = Math.pow(this.endB.x - this.endA.x, 2);
     return Math.sqrt(sqrOfDiffOfXCoordinates + sqrOfDiffOfYCoordinates);
   }
 
@@ -27,6 +25,7 @@ class Line {
     const diffOfYCoordinate = this.endB.y - this.endA.y;
     return diffOfYCoordinate / diffOfXCoordinate;
   }
+
   isParrellel(other) {
     if (this.slope == other.slope) {
       return true;

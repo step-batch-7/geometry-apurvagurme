@@ -59,6 +59,7 @@ describe('Line', function() {
       const actual = line1.isParrellel(line2);
       assert.strictEqual(actual, true);
     });
+
     it('isParrellel method should give true when given lines are parallel', function() {
       const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
       const line2 = new Line({ x: 0, y: 1 }, { x: 5, y: 10 });
