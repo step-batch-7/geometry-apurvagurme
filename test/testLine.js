@@ -25,5 +25,12 @@ describe('Line', function() {
       let expected = false;
       assert.strictEqual(actual, expected);
     });
+    it('isEqualTo method should give false when the other line is not instance of the same Line class', function() {
+      const a = new Line(1, 2, 3, 4);
+      const b = '';
+      let actual = a.isEqualTo(b);
+      let expected = false;
+      assert.strictEqual(actual, expected);
+    });
   });
 });
