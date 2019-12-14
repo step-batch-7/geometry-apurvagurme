@@ -66,8 +66,4 @@ class Line {
   }
 }
 
-class Point {
-  constructor() {}
-}
-
-module.exports = { Line, Point };
+module.exports = Line;

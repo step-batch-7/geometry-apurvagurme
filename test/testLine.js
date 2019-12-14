@@ -1,4 +1,4 @@
-const { Line, Point } = require('../src/line');
+const Line = require('../src/line');
 const { assert } = require('chai');
 
 describe('Line', function() {
