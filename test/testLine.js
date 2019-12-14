@@ -115,4 +115,14 @@ describe('Line', function() {
       assert.strictEqual(line1.findY(1), 1);
     });
   });
+
+  describe('split', function() {
+    it('should give two lines splitted exactly of the center of the given line', function() {
+      const line = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
+      const actual = line.split();
+      const line1 = new Line({ x: 1, y: 2 }, { x: 2, y: 3 });
+      const line2 = new Line({ x: 2, y: 3 }, { x: 3, y: 4 });
+      assert.ok(line1.isEqualTo(actual[0]) && line2.isEqualTo(actual[1]));
+    });
+  });
 });
