@@ -28,10 +28,18 @@ describe('POINT', function() {
       const point2 = new Point(3, 3);
       assert.ok(point1.isEqualTo(point2));
     });
+
     it('should invalidate if the given points are not equal', function() {
       const point1 = new Point(3, 3);
       const point2 = new Point(3, 4);
       assert.notOk(point1.isEqualTo(point2));
+    });
+  });
+
+  describe('clone', function() {
+    it('should give the copy of given point', function() {
+      const point = new Point(2, 3);
+      assert.ok(point.isEqualTo(point.clone()));
     });
   });
 });
