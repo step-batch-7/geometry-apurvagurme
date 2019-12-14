@@ -3,8 +3,13 @@ class Point {
     this.x = x;
     this.y = y;
   }
+
   toString() {
     return `[Point @(${this.x},${this.y})]`;
+  }
+
+  visit(funcRef) {
+    return funcRef(this.x, this.y);
   }
 }
 
