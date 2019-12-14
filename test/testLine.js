@@ -34,7 +34,7 @@ describe('Line', function() {
   describe('length', function() {
     it('should give length of the line for positive points', function() {
       const line = new Line({ x: 0, y: 0 }, { x: 3, y: 4 });
-      assert.approximately(line.length, 4.5, 0.5);
+      assert.strictEqual(line.length, 5);
     });
 
     it('should give zero if the points are same', function() {
