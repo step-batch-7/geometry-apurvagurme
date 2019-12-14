@@ -101,4 +101,10 @@ describe('Line', function() {
       assert.isNotOk(line1.isParallel(line2));
     });
   });
+  describe('findY', function() {
+    it('should give the Y coordinate of the given x Coordinate of given line', function() {
+      const line1 = new Line({ x: 0, y: 0 }, { x: 2, y: 2 });
+      assert.strictEqual(line1.findY(1), 1);
+    });
+  });
 });

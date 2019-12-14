@@ -38,6 +38,13 @@ class Line {
     return (this.endB.y - this.endA.y) / (this.endB.x - this.endA.x);
   }
 
+  findY(xCoordinate) {
+    return (
+      this.slope * xCoordinate +
+      getYIntercept(this.endA.x, this.endA.y, this.slope)
+    );
+  }
+
   isParallel(other) {
     if (other instanceof Line) {
       const yInterceptOfA = getYIntercept(this.endA.x, this.endA.y, this.slope);
