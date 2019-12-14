@@ -72,8 +72,8 @@ describe('Line', function() {
 
   describe('isParallel', function() {
     it('should validate when given lines are parallel', function() {
-      const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
-      const line2 = new Line({ x: 0, y: 0 }, { x: 5, y: 10 });
+      const line1 = new Line({ x: 0, y: 0 }, { x: 6, y: 0 });
+      const line2 = new Line({ x: 0, y: 4 }, { x: 6, y: 4 });
       assert.ok(line1.isParallel(line2));
     });
 
@@ -86,12 +86,18 @@ describe('Line', function() {
     it('isParallel method should give false when given lines are equal', function() {
       const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
       const line2 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
-      assert.ok(line1.isParallel(line2));
+      assert.notOk(line1.isParallel(line2));
     });
 
     it('should invalidate when other line is not an instance of Line class', function() {
       const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
       const line2 = 'not a line';
+      assert.isNotOk(line1.isParallel(line2));
+    });
+
+    it('should invalidate when when is not an instance of Line class', function() {
+      const line1 = new Line({ x: 0, y: 0 }, { x: 1, y: 1 });
+      const line2 = new Line({ x: 2, y: 2 }, { x: 3, y: 3 });
       assert.isNotOk(line1.isParallel(line2));
     });
   });

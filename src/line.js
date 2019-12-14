@@ -2,6 +2,10 @@ const arePointsEqual = function(a, b) {
   return a.x === b.x && a.y === b.y;
 };
 
+const getYIntercept = function(x, y, m) {
+  return y - m * x;
+};
+
 class Line {
   constructor(point1, point2) {
     this.endA = { x: point1.x, y: point1.y };
@@ -35,9 +39,17 @@ class Line {
   }
 
   isParallel(other) {
-    if (other === this) return false;
-    return other instanceof Line && this.slope == other.slope;
+    if (other instanceof Line) {
+      const yInterceptOfA = getYIntercept(this.endA.x, this.endA.y, this.slope);
+      const yInterceptOfB = getYIntercept(
+        other.endA.x,
+        other.endA.y,
+        other.slope
+      );
+      if (yInterceptOfA == yInterceptOfB) return false;
+      return this.slope == other.slope;
+    }
+    return false;
   }
 }
-
 module.exports = Line;
