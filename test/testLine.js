@@ -1,11 +1,11 @@
-const Line = require('../src/line');
+const { Line, Point } = require('../src/line');
 const { assert } = require('chai');
 
 describe('Line', function() {
   describe('toString', function() {
     it('should give the string representation of line object', function() {
       const line1 = new Line({ x: 1, y: 1 }, { x: 4, y: 3 });
-      const expected = 'Line (1,1)-----(4,3)';
+      const expected = '[Line (1,1) to (4,3)]';
       const actual = line1.toString();
       assert.strictEqual(actual, expected);
     });

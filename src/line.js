@@ -15,7 +15,7 @@ class Line {
   toString() {
     const endA = `(${this.endA.x},${this.endA.y})`;
     const endB = `(${this.endB.x},${this.endB.y})`;
-    return `Line ${endA}-----${endB}`;
+    return `[Line ${endA} to ${endB}]`;
   }
 
   isEqualTo(other) {
@@ -50,6 +50,7 @@ class Line {
     const slope = this.slope;
     return (yCoordinate - yIntercept) / slope;
   }
+
   isParallel(other) {
     if (other instanceof Line) {
       const yInterceptOfA = getYIntercept(this.endA.x, this.endA.y, this.slope);
@@ -64,4 +65,9 @@ class Line {
     return false;
   }
 }
-module.exports = Line;
+
+class Point {
+  constructor() {}
+}
+
+module.exports = { Line, Point };
