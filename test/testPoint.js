@@ -22,4 +22,16 @@ describe('POINT', function() {
       );
     });
   });
+  describe('isEqualTo', function() {
+    it('should validate if the given points are equal', function() {
+      const point1 = new Point(3, 3);
+      const point2 = new Point(3, 3);
+      assert.ok(point1.isEqualTo(point2));
+    });
+    it('should invalidate if the given points are not equal', function() {
+      const point1 = new Point(3, 3);
+      const point2 = new Point(3, 4);
+      assert.notOk(point1.isEqualTo(point2));
+    });
+  });
 });
