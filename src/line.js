@@ -6,7 +6,7 @@ const getYIntercept = function(x, y, m) {
   return y - m * x;
 };
 
-const isCoordinateInRange = function(number, range1, range2) {
+const isNumberInRange = function(number, range1, range2) {
   return (
     (number >= range1 && number <= range2) ||
     (number >= range2 && number <= range1)
@@ -46,10 +46,12 @@ class Line {
   }
 
   findY(xCoordinate) {
-    return (
-      this.slope * xCoordinate +
-      getYIntercept(this.endA.x, this.endA.y, this.slope)
-    );
+    const slope = this.slope;
+    const yIntercept = getYIntercept(this.endA.x, this.endA.y, this.slope);
+    if (isNumberInRange(yIntercept, this.endA.y, this.endB.y)) {
+      return slope * xCoordinate + yIntercept;
+    }
+    return NaN;
   }
 
   findX(yCoordinate) {
@@ -66,8 +68,7 @@ class Line {
         other.endA.y,
         other.slope
       );
-      if (yInterceptOfA == yInterceptOfB) return false;
-      return this.slope == other.slope;
+      if (yInterceptOfA != yInterceptOfB) return this.slope == other.slope;
     }
     return false;
   }
@@ -83,8 +84,8 @@ class Line {
 
   hasPoint(point) {
     return (
-      isCoordinateInRange(point.x, this.endA.x, this.endB.x) &&
-      isCoordinateInRange(point.y, this.endA.y, this.endB.y)
+      isNumberInRange(point.x, this.endA.x, this.endB.x) &&
+      isNumberInRange(point.y, this.endA.y, this.endB.y)
     );
   }
 }
