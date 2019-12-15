@@ -7,7 +7,7 @@ const getYIntercept = function(x, y, slope) {
 };
 
 const isNumberInRange = function(number, range) {
-  [min, max] = range.sort();
+  [min, max] = range.sort((a, b) => a - b);
   return number >= min && number <= max;
 };
 
@@ -42,16 +42,16 @@ class Line {
   }
 
   findY(xCoordinate) {
+    if (!isNumberInRange(xCoordinate, [this.endA.x, this.endB.x])) return NaN;
     const slope = this.slope;
     const yIntercept = getYIntercept(this.endA.x, this.endA.y, this.slope);
-    if (!isNumberInRange(xCoordinate, [this.endA.x, this.endB.x])) return NaN;
     return slope * xCoordinate + yIntercept;
   }
 
   findX(yCoordinate) {
+    if (!isNumberInRange(yCoordinate, [this.endA.y, this.endB.y])) return NaN;
     const slope = this.slope;
     const yIntercept = getYIntercept(this.endA.x, this.endA.y, this.slope);
-    if (!isNumberInRange(yCoordinate, [this.endA.y, this.endB.y])) return NaN;
     return (yCoordinate - yIntercept) / slope;
   }
 
