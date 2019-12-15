@@ -26,13 +26,11 @@ class Line {
   }
 
   isEqualTo(other) {
-    if (other instanceof Line) {
-      return (
-        arePointsEqual(this.endA, other.endA) &&
-        arePointsEqual(this.endB, other.endB)
-      );
-    }
-    return false;
+    if (!(other instanceof Line)) return false;
+    return (
+      arePointsEqual(this.endA, other.endA) &&
+      arePointsEqual(this.endB, other.endB)
+    );
   }
 
   get length() {
@@ -48,19 +46,15 @@ class Line {
   findY(xCoordinate) {
     const slope = this.slope;
     const yIntercept = getYIntercept(this.endA.x, this.endA.y, this.slope);
-    if (isNumberInRange(yIntercept, this.endA.y, this.endB.y)) {
-      return slope * xCoordinate + yIntercept;
-    }
-    return NaN;
+    if (!isNumberInRange(xCoordinate, this.endA.x, this.endB.x)) return NaN;
+    return slope * xCoordinate + yIntercept;
   }
 
   findX(yCoordinate) {
     const slope = this.slope;
     const yIntercept = getYIntercept(this.endA.x, this.endA.y, this.slope);
-    if (isNumberInRange(yIntercept, this.endA.y, this.endB.y)) {
-      return (yCoordinate - yIntercept) / slope;
-    }
-    return NaN;
+    if (!isNumberInRange(yCoordinate, this.endA.y, this.endB.y)) return NaN;
+    return (yCoordinate - yIntercept) / slope;
   }
 
   isParallel(other) {

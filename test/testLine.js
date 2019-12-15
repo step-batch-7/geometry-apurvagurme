@@ -113,6 +113,11 @@ describe('LINE', function() {
       const line1 = new Line({ x: 1, y: 1 }, { x: 2, y: 2 });
       assert.deepStrictEqual(line1.findY(9), NaN);
     });
+
+    it('should give the NaN when oneEndPoint is(0,0) of the Line Segment', function() {
+      const line1 = new Line({ x: 0, y: 0 }, { x: 2, y: 2 });
+      assert.deepStrictEqual(line1.findY(9), NaN);
+    });
   });
 
   describe('findX', function() {
@@ -124,6 +129,11 @@ describe('LINE', function() {
     it('should give the NaN when outside the Line Segment', function() {
       const line1 = new Line({ x: 1, y: 1 }, { x: 2, y: 2 });
       assert.deepStrictEqual(line1.findX(9), NaN);
+    });
+
+    it('should give the NaN when oneEndPoint is(0,0) of the Line Segment', function() {
+      const line1 = new Line({ x: 0, y: 0 }, { x: 2, y: 2 });
+      assert.deepStrictEqual(line1.findY(9), NaN);
     });
   });
 
