@@ -49,6 +49,11 @@ describe('POINT', function() {
       assert.notOk(point1.isEqualTo(point2));
     });
 
+    it('should determine if both points passed is same', () => {
+      const point = new Point(5, 9);
+      assert.ok(point.isEqualTo(point));
+    });
+
     it('should invalidate if given object has same coordinates but not of Point instance', function() {
       const point1 = new Point(3, 5);
       const point2 = { x: 3, y: 5 };

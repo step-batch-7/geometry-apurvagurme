@@ -25,6 +25,18 @@ describe('LINE', function() {
       assert.isFalse(line1.isEqualTo(line2));
     });
 
+    it('should invalidate when start point of a line is different', function() {
+      const line1 = new Line({ x: 0, y: 2 }, { x: 3, y: 4 });
+      const line2 = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
+      assert.isFalse(line1.isEqualTo(line2));
+    });
+
+    it('should invalidate when end point of a line is different', function() {
+      const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 4 });
+      const line2 = new Line({ x: 1, y: 2 }, { x: 3, y: 5 });
+      assert.isFalse(line1.isEqualTo(line2));
+    });
+
     it('should invalidate when the other line is not instance of the same Line class', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       const line2 = 'not a line';
@@ -53,9 +65,14 @@ describe('LINE', function() {
       assert.approximately(line.length, 5, 0.9);
     });
 
-    it('should give length of the line for negative points', function() {
+    it('should give length of the line if any one endPoint is negative', function() {
       const line = new Line({ x: -1, y: -2 }, { x: 2, y: 2 });
       assert.strictEqual(line.length, 5);
+    });
+
+    it('should give length for a line whose both end points are negative', function() {
+      const line = new Line({ x: -1, y: -2 }, { x: -5, y: -5 });
+      assert.deepStrictEqual(line.length, 5);
     });
   });
 
@@ -172,6 +189,14 @@ describe('LINE', function() {
       const line2 = new Line({ x: 1, y: 5.5 }, { x: 12, y: 8 });
       assert.isTrue(line1.isEqualTo(actual[0]) && line2.isEqualTo(actual[1]));
     });
+
+    it("should give lines of length 0 if the given line's length is 0", function() {
+      const line = new Line({ x: 1, y: 2 }, { x: 1, y: 2 });
+      const actual = line.split();
+      const line1 = new Line({ x: 1, y: 2 }, { x: 1, y: 2 });
+      const line2 = new Line({ x: 1, y: 2 }, { x: 1, y: 2 });
+      assert.isTrue(line1.isEqualTo(actual[0]) && line2.isEqualTo(actual[1]));
+    });
   });
 
   describe('hasPoint', function() {
@@ -197,6 +222,11 @@ describe('LINE', function() {
       const point = new Point(9, 9);
       const line = new Line({ x: 1, y: 1 }, { x: 3, y: 3 });
       assert.isFalse(line.hasPoint(point));
+    });
+
+    it('should invalidate if the given object is not a point object', function() {
+      const line = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
+      assert.notOk(line.hasPoint({ x: 4, y: 5 }));
     });
   });
 });
