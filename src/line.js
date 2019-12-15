@@ -1,16 +1,14 @@
-const arePointsEqual = function(a, b) {
-  return a.x === b.x && a.y === b.y;
+const arePointsEqual = function(pointA, pointB) {
+  return pointA.x === pointB.x && pointA.y === pointB.y;
 };
 
-const getYIntercept = function(x, y, m) {
-  return y - m * x;
+const getYIntercept = function(x, y, slope) {
+  return y - slope * x;
 };
 
-const isNumberInRange = function(number, range1, range2) {
-  return (
-    (number >= range1 && number <= range2) ||
-    (number >= range2 && number <= range1)
-  );
+const isNumberInRange = function(number, range) {
+  [min, max] = range.sort();
+  return number >= min && number <= max;
 };
 
 class Line {
@@ -46,14 +44,14 @@ class Line {
   findY(xCoordinate) {
     const slope = this.slope;
     const yIntercept = getYIntercept(this.endA.x, this.endA.y, this.slope);
-    if (!isNumberInRange(xCoordinate, this.endA.x, this.endB.x)) return NaN;
+    if (!isNumberInRange(xCoordinate, [this.endA.x, this.endB.x])) return NaN;
     return slope * xCoordinate + yIntercept;
   }
 
   findX(yCoordinate) {
     const slope = this.slope;
     const yIntercept = getYIntercept(this.endA.x, this.endA.y, this.slope);
-    if (!isNumberInRange(yCoordinate, this.endA.y, this.endB.y)) return NaN;
+    if (!isNumberInRange(yCoordinate, [this.endA.y, this.endB.y])) return NaN;
     return (yCoordinate - yIntercept) / slope;
   }
 
@@ -81,8 +79,8 @@ class Line {
 
   hasPoint(point) {
     return (
-      isNumberInRange(point.x, this.endA.x, this.endB.x) &&
-      isNumberInRange(point.y, this.endA.y, this.endB.y)
+      isNumberInRange(point.x, [this.endA.x, this.endB.x]) &&
+      isNumberInRange(point.y, [this.endA.y, this.endB.y])
     );
   }
 }

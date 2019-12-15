@@ -16,19 +16,24 @@ describe('LINE', function() {
     it('should validate when a line is equal to another line', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       const line2 = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
-      assert.ok(line1.isEqualTo(line2));
+      assert.isTrue(line1.isEqualTo(line2));
     });
 
     it('should invalidate when one single point of a line is different', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       const line2 = new Line({ x: 1, y: 2 }, { x: 3, y: 5 });
-      assert.isNotOk(line1.isEqualTo(line2));
+      assert.isFalse(line1.isEqualTo(line2));
     });
 
     it('should invalidate when the other line is not instance of the same Line class', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       const line2 = 'not a line';
-      assert.isNotOk(line1.isEqualTo(line2));
+      assert.isFalse(line1.isEqualTo(line2));
+    });
+
+    it('should validate when same line is given', function() {
+      const line1 = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
+      assert.isTrue(line1.isEqualTo(line1));
     });
   });
 
@@ -69,37 +74,41 @@ describe('LINE', function() {
       const line = new Line({ x: 0, y: 2 }, { x: 0, y: 3 });
       assert.strictEqual(line.slope, Infinity);
     });
+
+    it('should give slope of line with negative coordinates', function() {
+      const line = new Line({ x: -2, y: 3 }, { x: 0, y: -1 });
+      assert.strictEqual(line.slope, -2);
+    });
   });
 
   describe('isParallel', function() {
     it('should validate when given lines are parallel', function() {
       const line1 = new Line({ x: 0, y: 0 }, { x: 6, y: 0 });
       const line2 = new Line({ x: 0, y: 4 }, { x: 6, y: 4 });
-      assert.ok(line1.isParallel(line2));
+      assert.isTrue(line1.isParallel(line2));
     });
 
     it('should invalidate if given lines are not parallel', function() {
       const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
       const line2 = new Line({ x: 0, y: 1 }, { x: 5, y: 10 });
-      assert.isNotOk(line1.isParallel(line2));
+      assert.isFalse(line1.isParallel(line2));
     });
 
-    it('isParallel method should give false when given lines are equal', function() {
+    it('should invalidate when given lines are equal', function() {
       const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
       const line2 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
-      assert.notOk(line1.isParallel(line2));
+      assert.isFalse(line1.isParallel(line2));
     });
 
     it('should invalidate when other line is not an instance of Line class', function() {
       const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
       const line2 = 'not a line';
-      assert.isNotOk(line1.isParallel(line2));
+      assert.isFalse(line1.isParallel(line2));
     });
 
-    it('should invalidate when when is not an instance of Line class', function() {
+    it('should invalidate when same line is given', function() {
       const line1 = new Line({ x: 0, y: 0 }, { x: 1, y: 1 });
-      const line2 = new Line({ x: 2, y: 2 }, { x: 3, y: 3 });
-      assert.isNotOk(line1.isParallel(line2));
+      assert.isFalse(line1.isParallel(line1));
     });
   });
 
@@ -109,14 +118,14 @@ describe('LINE', function() {
       assert.strictEqual(line1.findY(1), 1);
     });
 
-    it('should give the NaN when outside the Line Segment', function() {
+    it('should give the NaN when given X is not on line', function() {
       const line1 = new Line({ x: 1, y: 1 }, { x: 2, y: 2 });
-      assert.deepStrictEqual(line1.findY(9), NaN);
+      assert.isNaN(line1.findY(9));
     });
 
     it('should give the NaN when oneEndPoint is(0,0) of the Line Segment', function() {
       const line1 = new Line({ x: 0, y: 0 }, { x: 2, y: 2 });
-      assert.deepStrictEqual(line1.findY(9), NaN);
+      assert.isNaN(line1.findY(9));
     });
   });
 
@@ -126,7 +135,7 @@ describe('LINE', function() {
       assert.strictEqual(line1.findY(1), 1);
     });
 
-    it('should give the NaN when outside the Line Segment', function() {
+    it('should give the NaN when given Y is not on line', function() {
       const line1 = new Line({ x: 1, y: 1 }, { x: 2, y: 2 });
       assert.deepStrictEqual(line1.findX(9), NaN);
     });
@@ -143,7 +152,15 @@ describe('LINE', function() {
       const actual = line.split();
       const line1 = new Line({ x: 1, y: 2 }, { x: 2, y: 3 });
       const line2 = new Line({ x: 2, y: 3 }, { x: 3, y: 4 });
-      assert.ok(line1.isEqualTo(actual[0]) && line2.isEqualTo(actual[1]));
+      assert.isTrue(line1.isEqualTo(actual[0]) && line2.isEqualTo(actual[1]));
+    });
+
+    it('should return two equal lines of line with negative coordinates', function() {
+      const line = new Line({ x: -10, y: 3 }, { x: 12, y: 8 });
+      const actual = line.split();
+      const line1 = new Line({ x: -10, y: 3 }, { x: 1, y: 5.5 });
+      const line2 = new Line({ x: 1, y: 5.5 }, { x: 12, y: 8 });
+      assert.isTrue(line1.isEqualTo(actual[0]) && line2.isEqualTo(actual[1]));
     });
   });
 
@@ -151,25 +168,25 @@ describe('LINE', function() {
     it('should validate when endpoint is given', function() {
       const point = new Point(1, 2);
       const line = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
-      assert.ok(line.hasPoint(point));
+      assert.isTrue(line.hasPoint(point));
     });
 
     it('should validate when endpoint is given', function() {
       const point = new Point(3, 4);
       const line = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
-      assert.ok(line.hasPoint(point));
+      assert.isTrue(line.hasPoint(point));
     });
 
     it('should validate when the given point is on the line', function() {
       const point = new Point(2, 2);
       const line = new Line({ x: 1, y: 1 }, { x: 3, y: 3 });
-      assert.ok(line.hasPoint(point));
+      assert.isTrue(line.hasPoint(point));
     });
 
     it('should invalidate when the given point is not on the line', function() {
       const point = new Point(9, 9);
       const line = new Line({ x: 1, y: 1 }, { x: 3, y: 3 });
-      assert.notOk(line.hasPoint(point));
+      assert.isFalse(line.hasPoint(point));
     });
   });
 });
