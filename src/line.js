@@ -43,6 +43,7 @@ class Line {
 
   findY(xCoordinate) {
     if (!isNumberInRange(xCoordinate, [this.endA.x, this.endB.x])) return NaN;
+    if (this.endA.x == this.endB.x) return this.endA.y;
     const slope = this.slope;
     const yIntercept = getYIntercept(this.endA.x, this.endA.y, this.slope);
     return slope * xCoordinate + yIntercept;
@@ -50,6 +51,7 @@ class Line {
 
   findX(yCoordinate) {
     if (!isNumberInRange(yCoordinate, [this.endA.y, this.endB.y])) return NaN;
+    if (this.endA.y == this.endB.y) return this.endA.x;
     const slope = this.slope;
     const yIntercept = getYIntercept(this.endA.x, this.endA.y, this.slope);
     return (yCoordinate - yIntercept) / slope;

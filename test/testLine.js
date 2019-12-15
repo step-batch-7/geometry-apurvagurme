@@ -97,7 +97,6 @@ describe('LINE', function() {
     it('should invalidate when given lines are equal', function() {
       const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
       const line2 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
-      // console.log(line1.isParallel(line2));
       assert.isFalse(line1.isParallel(line2));
     });
 
@@ -128,22 +127,32 @@ describe('LINE', function() {
       const line1 = new Line({ x: 0, y: 0 }, { x: 2, y: 2 });
       assert.isNaN(line1.findY(9));
     });
+
+    it('should give the first Y coordinate if the line is parallel to X-axis', function() {
+      const line1 = new Line({ x: 0, y: 1 }, { x: 0, y: 2 });
+      assert.deepStrictEqual(line1.findY(0), 1);
+    });
   });
 
   describe('findX', function() {
     it('should give the X coordinate of the given y Coordinate of given line', function() {
       const line1 = new Line({ x: 0, y: 0 }, { x: 2, y: 2 });
-      assert.strictEqual(line1.findY(1), 1);
+      assert.strictEqual(line1.findX(1), 1);
     });
 
     it('should give the NaN when given Y is not on line', function() {
       const line1 = new Line({ x: 1, y: 1 }, { x: 2, y: 2 });
-      assert.deepStrictEqual(line1.findX(9), NaN);
+      assert.isNaN(line1.findX(9));
     });
 
     it('should give the NaN when oneEndPoint is(0,0) of the Line Segment', function() {
       const line1 = new Line({ x: 0, y: 0 }, { x: 2, y: 2 });
-      assert.deepStrictEqual(line1.findY(9), NaN);
+      assert.isNaN(line1.findX(9));
+    });
+
+    it('should give the first X coordinate if the line is parallel to Y-axis', function() {
+      const line1 = new Line({ x: 1, y: 0 }, { x: 2, y: 0 });
+      assert.deepStrictEqual(line1.findX(0), 1);
     });
   });
 
