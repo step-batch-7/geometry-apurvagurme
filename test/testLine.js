@@ -120,6 +120,11 @@ describe('LINE', function() {
       const line1 = new Line({ x: 0, y: 0 }, { x: 2, y: 2 });
       assert.strictEqual(line1.findY(1), 1);
     });
+
+    it('should give the NaN when outside the Line Segment', function() {
+      const line1 = new Line({ x: 1, y: 1 }, { x: 2, y: 2 });
+      assert.deepStrictEqual(line1.findX(9), NaN);
+    });
   });
 
   describe('split', function() {

@@ -55,9 +55,12 @@ class Line {
   }
 
   findX(yCoordinate) {
-    const yIntercept = getYIntercept(this.endA.x, this.endA.y, this.slope);
     const slope = this.slope;
-    return (yCoordinate - yIntercept) / slope;
+    const yIntercept = getYIntercept(this.endA.x, this.endA.y, this.slope);
+    if (isNumberInRange(yIntercept, this.endA.y, this.endB.y)) {
+      return (yCoordinate - yIntercept) / slope;
+    }
+    return NaN;
   }
 
   isParallel(other) {
