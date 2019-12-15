@@ -6,6 +6,13 @@ const getYIntercept = function(x, y, m) {
   return y - m * x;
 };
 
+const isCoordinateInRange = function(number, range1, range2) {
+  return (
+    (number >= range1 && number <= range2) ||
+    (number >= range2 && number <= range1)
+  );
+};
+
 class Line {
   constructor(point1, point2) {
     this.endA = { x: point1.x, y: point1.y };
@@ -72,6 +79,13 @@ class Line {
     const line1 = new Line(this.endA, midPoint);
     const line2 = new Line(midPoint, this.endB);
     return [line1, line2];
+  }
+
+  hasPoint(point) {
+    return (
+      isCoordinateInRange(point.x, this.endA.x, this.endB.x) &&
+      isCoordinateInRange(point.y, this.endA.y, this.endB.y)
+    );
   }
 }
 

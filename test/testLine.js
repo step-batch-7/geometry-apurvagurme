@@ -1,7 +1,8 @@
 const Line = require('../src/line');
+const Point = require('../src/point');
 const { assert } = require('chai');
 
-describe('Line', function() {
+describe('LINE', function() {
   describe('toString', function() {
     it('should give the string representation of line object', function() {
       const line1 = new Line({ x: 1, y: 1 }, { x: 4, y: 3 });
@@ -123,6 +124,32 @@ describe('Line', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 2, y: 3 });
       const line2 = new Line({ x: 2, y: 3 }, { x: 3, y: 4 });
       assert.ok(line1.isEqualTo(actual[0]) && line2.isEqualTo(actual[1]));
+    });
+  });
+
+  describe('hasPoint', function() {
+    it('should validate when endpoint is given', function() {
+      const point = new Point(1, 2);
+      const line = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
+      assert.ok(line.hasPoint(point));
+    });
+
+    it('should validate when endpoint is given', function() {
+      const point = new Point(3, 4);
+      const line = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
+      assert.ok(line.hasPoint(point));
+    });
+
+    it('should validate when the given point is on the line', function() {
+      const point = new Point(2, 2);
+      const line = new Line({ x: 1, y: 1 }, { x: 3, y: 3 });
+      assert.ok(line.hasPoint(point));
+    });
+
+    it('should invalidate when the given point is not on the line', function() {
+      const point = new Point(9, 9);
+      const line = new Line({ x: 1, y: 1 }, { x: 3, y: 3 });
+      assert.notOk(line.hasPoint(point));
     });
   });
 });

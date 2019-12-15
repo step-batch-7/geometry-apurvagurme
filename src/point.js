@@ -21,8 +21,4 @@ class Point {
   }
 }
 
-// p = new Point(2, 3);
-// console.log(p);
-// console.log(p.clone());
-
 module.exports = Point;
