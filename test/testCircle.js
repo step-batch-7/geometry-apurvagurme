@@ -1,4 +1,5 @@
 const Circle = require('../src/circle');
+const Point = require('../src/point');
 const { assert } = require('chai');
 
 describe('Circle', function() {
@@ -29,6 +30,26 @@ describe('Circle', function() {
     it('should give perimeter of given circle', function() {
       const circle = new Circle({ x: 1, y: 2 }, 2);
       assert.approximately(circle.perimeter, 12, 0.6);
+    });
+  });
+
+  describe('hasPoint', function() {
+    it('should validate point is on the circle', function() {
+      const circle = new Circle({ x: 0, y: 0 }, 2);
+      const point = new Point(0, 2);
+      assert.isTrue(circle.hasPoint(point));
+    });
+
+    it('should invalidate point is outside the circle', function() {
+      const circle = new Circle({ x: 0, y: 0 }, 2);
+      const point = new Point(0, 3);
+      assert.isFalse(circle.hasPoint(point));
+    });
+
+    it('should invalidate point is in the circle', function() {
+      const circle = new Circle({ x: 0, y: 0 }, 2);
+      const point = new Point(0, 2);
+      assert.isTrue(circle.hasPoint(point));
     });
   });
 });
