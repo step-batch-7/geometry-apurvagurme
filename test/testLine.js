@@ -237,4 +237,12 @@ describe('LINE', function() {
       assert.deepStrictEqual(line.findPointFromStart(0), point);
     });
   });
+
+  describe('findPointFromEnd', function() {
+    it('should give the coordinates of point at a given distance from end point of a line', function() {
+      const line = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
+      const point = new Point(3, 4);
+      assert.deepStrictEqual(line.findPointFromEnd(0), point);
+    });
+  });
 });
