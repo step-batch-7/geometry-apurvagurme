@@ -16,6 +16,10 @@ class Circle {
       this.radius == other.radius
     );
   }
+
+  get area() {
+    return Math.PI * this.radius ** 2;
+  }
 }
 
 module.exports = Circle;
