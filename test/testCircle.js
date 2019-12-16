@@ -24,4 +24,11 @@ describe('Circle', function() {
       assert.approximately(circle.area, 78, 0.6);
     });
   });
+
+  describe('perimeter', function() {
+    it('should give perimeter of given circle', function() {
+      const circle = new Circle({ x: 1, y: 2 }, 2);
+      assert.approximately(circle.perimeter, 12, 0.6);
+    });
+  });
 });
