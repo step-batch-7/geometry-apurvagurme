@@ -248,11 +248,6 @@ describe('LINE', function() {
       const point = new Point(1, 2);
       assert.deepStrictEqual(line.findPointFromStart(0), point);
     });
-
-    it('should give null if distance is NaN', function() {
-      const line = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
-      assert.strictEqual(line.findPointFromStart('distance'), null);
-    });
   });
 
   describe('findPointFromEnd', function() {
@@ -260,11 +255,6 @@ describe('LINE', function() {
       const line = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       const point = new Point(3, 4);
       assert.deepStrictEqual(line.findPointFromEnd(0), point);
-    });
-
-    it('should give null if distance is NaN', function() {
-      const line = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
-      assert.deepStrictEqual(line.findPointFromEnd('distance'), null);
     });
   });
 });

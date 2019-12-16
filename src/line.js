@@ -96,35 +96,29 @@ class Line {
   }
 
   findPointFromStart(distance) {
-    if (typeof distance == 'number') {
-      const distanceRatio = distance / this.length;
-      const xCoordinate = getCoordinate(
-        [this.endA.x, this.endB.x],
-        distanceRatio
-      );
-      const yCoordinate = getCoordinate(
-        [this.endA.y, this.endB.y],
-        distanceRatio
-      );
-      return new Point(xCoordinate, yCoordinate);
-    }
-    return null;
+    const distanceRatio = distance / this.length;
+    const xCoordinate = getCoordinate(
+      [this.endA.x, this.endB.x],
+      distanceRatio
+    );
+    const yCoordinate = getCoordinate(
+      [this.endA.y, this.endB.y],
+      distanceRatio
+    );
+    return new Point(xCoordinate, yCoordinate);
   }
 
   findPointFromEnd(distance) {
-    if (typeof distance == 'number') {
-      const distanceRatio = distance / this.length;
-      const xCoordinate = getCoordinate(
-        [this.endB.x, this.endA.x],
-        distanceRatio
-      );
-      const yCoordinate = getCoordinate(
-        [this.endB.y, this.endA.y],
-        distanceRatio
-      );
-      return new Point(xCoordinate, yCoordinate);
-    }
-    return null;
+    const distanceRatio = distance / this.length;
+    const xCoordinate = getCoordinate(
+      [this.endB.x, this.endA.x],
+      distanceRatio
+    );
+    const yCoordinate = getCoordinate(
+      [this.endB.y, this.endA.y],
+      distanceRatio
+    );
+    return new Point(xCoordinate, yCoordinate);
   }
 }
 
