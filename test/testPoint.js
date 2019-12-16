@@ -68,4 +68,12 @@ describe('POINT', function() {
       assert.ok(point.isEqualTo(point.clone()));
     });
   });
+
+  describe('findDistanceTo', function() {
+    it('should give the distance between two points', function() {
+      const point1 = new Point(0, 0);
+      const point2 = new Point(3, 4);
+      assert.strictEqual(point1.findDistanceTo(point2), 5);
+    });
+  });
 });
