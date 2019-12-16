@@ -9,7 +9,8 @@ const isNumberInRange = function(number, range) {
   return number >= min && number <= max;
 };
 
-const getCoordinate = function(coordinates, distanceRatio) {
+const getCoordinate = function(coordinates, distance, length) {
+  const distanceRatio = distance / length;
   return (1 - distanceRatio) * coordinates[0] + distanceRatio * coordinates[1];
 };
 
@@ -89,29 +90,15 @@ class Line {
   }
 
   findPointFromStart(distance) {
-    const distanceRatio = distance / this.length;
-    const xCoordinate = getCoordinate(
-      [this.endA.x, this.endB.x],
-      distanceRatio
-    );
-    const yCoordinate = getCoordinate(
-      [this.endA.y, this.endB.y],
-      distanceRatio
-    );
-    return new Point(xCoordinate, yCoordinate);
+    const x = getCoordinate([this.endA.x, this.endB.x], distance, this.length);
+    const y = getCoordinate([this.endA.y, this.endB.y], distance, this.length);
+    return new Point(x, y);
   }
 
   findPointFromEnd(distance) {
-    const distanceRatio = distance / this.length;
-    const xCoordinate = getCoordinate(
-      [this.endB.x, this.endA.x],
-      distanceRatio
-    );
-    const yCoordinate = getCoordinate(
-      [this.endB.y, this.endA.y],
-      distanceRatio
-    );
-    return new Point(xCoordinate, yCoordinate);
+    const x = getCoordinate([this.endB.x, this.endA.x], distance, this.length);
+    const y = getCoordinate([this.endB.y, this.endA.y], distance, this.length);
+    return new Point(x, y);
   }
 }
 
