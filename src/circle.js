@@ -1,6 +1,8 @@
+const Point = require('./point');
+
 class Circle {
   constructor(point, radius) {
-    this.point = point;
+    this.point = new Point(point.x, point.y);
     this.radius = radius;
   }
 
@@ -26,9 +28,7 @@ class Circle {
   }
 
   hasPoint(point) {
-    const differenceOfXs = this.point.x - point.x;
-    const differenceOfYs = this.point.y - point.y;
-    const distance = Math.hypot(differenceOfXs, differenceOfYs);
+    const distance = this.point.findDistanceTo(point);
     return distance == this.radius;
   }
 }
