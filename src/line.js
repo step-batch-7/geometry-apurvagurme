@@ -87,6 +87,8 @@ class Line {
 
   hasPoint(point) {
     if (!(point instanceof Point)) return false;
+    const yIntercept = getYIntercept(this.endA.x, this.endA.y, this.slope);
+    if (point.y != this.slope * point.x + yIntercept) return false;
     return (
       isNumberInRange(point.x, [this.endA.x, this.endB.x]) &&
       isNumberInRange(point.y, [this.endA.y, this.endB.y])

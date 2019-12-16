@@ -228,6 +228,18 @@ describe('LINE', function() {
       const line = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       assert.notOk(line.hasPoint({ x: 4, y: 5 }));
     });
+
+    it('should invalidate if the given point is not on line but in range', function() {
+      const line = new Line({ x: 1, y: 1 }, { x: 4, y: 4 });
+      const point = new Point(2, 3);
+      assert.isFalse(line.hasPoint(point));
+    });
+
+    it('should validate if the given point is on line and line is perpendicular', function() {
+      const line = new Line({ x: 2, y: 1 }, { x: 2, y: 5 });
+      const point = new Point(2, 3);
+      assert.isFalse(line.hasPoint(point));
+    });
   });
 
   describe('findPointFromStart', function() {
