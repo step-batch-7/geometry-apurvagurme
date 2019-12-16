@@ -1,9 +1,5 @@
 const Point = require('./point');
 
-const arePointsEqual = function(pointA, pointB) {
-  return pointA.x === pointB.x && pointA.y === pointB.y;
-};
-
 const getYIntercept = function(x, y, slope) {
   return y - slope * x;
 };
@@ -19,8 +15,8 @@ const getCoordinate = function(coordinates, distanceRatio) {
 
 class Line {
   constructor(point1, point2) {
-    this.endA = { x: point1.x, y: point1.y };
-    this.endB = { x: point2.x, y: point2.y };
+    this.endA = new Point(point1.x, point1.y);
+    this.endB = new Point(point2.x, point2.y);
   }
 
   toString() {
@@ -31,10 +27,7 @@ class Line {
 
   isEqualTo(other) {
     if (!(other instanceof Line)) return false;
-    return (
-      arePointsEqual(this.endA, other.endA) &&
-      arePointsEqual(this.endB, other.endB)
-    );
+    return this.endA.isEqualTo(other.endA) && this.endB.isEqualTo(other.endB);
   }
 
   get length() {
