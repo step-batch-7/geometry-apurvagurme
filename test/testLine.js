@@ -229,4 +229,12 @@ describe('LINE', function() {
       assert.notOk(line.hasPoint({ x: 4, y: 5 }));
     });
   });
+
+  describe('findPointFromStart', function() {
+    it('should give the coordinates of point at a given distance from start point of a line', function() {
+      const line = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
+      const point = new Point(1, 2);
+      assert.deepStrictEqual(line.findPointFromStart(0), point);
+    });
+  });
 });

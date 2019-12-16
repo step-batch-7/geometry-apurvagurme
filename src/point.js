@@ -1,8 +1,3 @@
-const isNumberInRange = function(number, range) {
-  [min, max] = range.sort((a, b) => a - b);
-  return number >= min && number <= max;
-};
-
 class Point {
   constructor(x, y) {
     this.x = x;
@@ -33,10 +28,7 @@ class Point {
   }
 
   isOn(line) {
-    return (
-      isNumberInRange(this.x, [line.endA.x, line.endB.x]) &&
-      isNumberInRange(this.y, [line.endA.y, line.endB.y])
-    );
+    return line.hasPoint(this);
   }
 }
 

@@ -88,6 +88,15 @@ class Line {
       isNumberInRange(point.y, [this.endA.y, this.endB.y])
     );
   }
+
+  findPointFromStart(distance) {
+    const distanceRatio = distance / this.length;
+    const xCoordinate =
+      (1 - distanceRatio) * this.endA.x + distanceRatio * this.endB.x;
+    const yCoordinate =
+      (1 - distanceRatio) * this.endA.y + distanceRatio * this.endB.y;
+    return new Point(xCoordinate, yCoordinate);
+  }
 }
 
 module.exports = Line;
