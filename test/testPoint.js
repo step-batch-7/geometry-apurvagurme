@@ -75,5 +75,29 @@ describe('POINT', function() {
       const point2 = new Point(3, 4);
       assert.strictEqual(point1.findDistanceTo(point2), 5);
     });
+
+    it('should give the distance zero if the points are equal', function() {
+      const point1 = new Point(3, 4);
+      const point2 = new Point(3, 4);
+      assert.strictEqual(point1.findDistanceTo(point2), 0);
+    });
+
+    it('should give distance of points in floating points', function() {
+      const point1 = new Point(0, 0);
+      const point2 = new Point(4, 4);
+      assert.approximately(point1.findDistanceTo(point2), 5, 0.9);
+    });
+
+    it('should give distance between two points if any one point is negative', function() {
+      const point1 = new Point(-1, -2);
+      const point2 = new Point(2, 2);
+      assert.strictEqual(point1.findDistanceTo(point2), 5);
+    });
+
+    it('should give distance between both points when both points are negative', function() {
+      const point1 = new Point(-1, -2);
+      const point2 = new Point(-5, -5);
+      assert.deepStrictEqual(point1.findDistanceTo(point2), 5);
+    });
   });
 });
