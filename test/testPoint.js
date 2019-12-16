@@ -1,3 +1,4 @@
+const Line = require('../src/line');
 const Point = require('../src/point');
 const { assert } = require('chai');
 
@@ -98,6 +99,14 @@ describe('POINT', function() {
       const point1 = new Point(-1, -2);
       const point2 = new Point(-5, -5);
       assert.deepStrictEqual(point1.findDistanceTo(point2), 5);
+    });
+  });
+
+  describe('isOn', function() {
+    it('should validate if the given point is on the given line or not', function() {
+      const point = new Point(1, 2);
+      const line = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
+      assert.isTrue(point.isOn(line));
     });
   });
 });
