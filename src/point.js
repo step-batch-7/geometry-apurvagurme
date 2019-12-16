@@ -8,8 +8,8 @@ class Point {
     return `[Point @(${this.x},${this.y})]`;
   }
 
-  visit(funcRef) {
-    return funcRef(this.x, this.y);
+  visit(doOperation) {
+    return doOperation(this.x, this.y);
   }
 
   isEqualTo(other) {
