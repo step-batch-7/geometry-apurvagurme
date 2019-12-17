@@ -84,7 +84,7 @@ describe('LINE', function() {
 
     it('should give slope of line as zero when the given line is parallel to X-axis', function() {
       const line = new Line({ x: 0, y: 0 }, { x: 4, y: 0 });
-      assert.strictEqual(line.slope, undefined);
+      assert.strictEqual(line.slope, 0);
     });
 
     it('should give slope of line as Infinity when the given line is parallel to Y-axis', function() {
@@ -238,7 +238,7 @@ describe('LINE', function() {
     it('should validate if the given point is on line and line is perpendicular', function() {
       const line = new Line({ x: 2, y: 1 }, { x: 2, y: 5 });
       const point = new Point(2, 3);
-      assert.isFalse(line.hasPoint(point));
+      assert.isTrue(line.hasPoint(point));
     });
 
     it('should validate if the given point is on the x-axis', function() {
@@ -249,6 +249,12 @@ describe('LINE', function() {
 
     it('should validate if the given point is on the y-axis', function() {
       const line = new Line({ x: 0, y: 0 }, { x: 0, y: 4 });
+      const point = new Point(0, 0);
+      assert.isTrue(line.hasPoint(point));
+    });
+
+    it('should validate if the given point is on the x-axis', function() {
+      const line = new Line({ x: 4, y: 0 }, { x: 0, y: 0 });
       const point = new Point(0, 0);
       assert.isTrue(line.hasPoint(point));
     });

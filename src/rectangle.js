@@ -1,4 +1,5 @@
 const Point = require('./point');
+const Line = require('./line');
 
 const isNumberInRange = function(number, range) {
   [min, max] = range.sort((a, b) => a - b);
@@ -45,6 +46,18 @@ class Rectangle {
       isNumberInRange(point.x, [this.endA.x, this.endB.x]) &&
       isNumberInRange(point.y, [this.endA.y, this.endB.y])
     );
+  }
+
+  hasPoint(point) {
+    if (!(point instanceof Point)) return false;
+    const AB = new Line({ x: this.endA.x, y: this.endB.y }, this.endB);
+    const BC = new Line(this.endB, { x: this.endB.x, y: this.endA.y });
+    const CD = new Line(
+      { x: this.endB.x, y: this.endA.y },
+      { x: this.endA.x, y: this.endA.y }
+    );
+    const DA = new Line(this.endA, { x: this.endA.x, y: this.endB.y });
+    return point.isOn(AB) || point.isOn(BC) || point.isOn(CD) || point.isOn(DA);
   }
 }
 

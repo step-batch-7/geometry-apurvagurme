@@ -1,8 +1,10 @@
 const Point = require('./point');
 
 const isNumberInRange = function(number, range) {
-  [min, max] = range.sort((a, b) => a - b);
-  return number >= min && number <= max;
+  return (
+    Math.min(range[0], range[1]) <= number &&
+    number <= Math.max(range[0], range[1])
+  );
 };
 
 const getCoordinate = function(coordinates, distance, length) {
@@ -11,9 +13,15 @@ const getCoordinate = function(coordinates, distance, length) {
 };
 
 const areCollinear = function(point1, point2, point3) {
+  // return (
+  //   (point2.y - point1.y) * (point3.x - point2.x) ===
+  //   (point3.y - point2.y) * (point2.x - point1.x)
+  // );
   return (
-    (point2.y - point1.y) * (point3.x - point2.x) ===
-    (point3.y - point2.y) * (point2.x - point1.x)
+    point1.x * (point2.y - point3.y) +
+      point2.x * (point3.y - point1.y) +
+      point3.x * (point1.y - point2.y) ===
+    0
   );
 };
 
@@ -39,7 +47,6 @@ class Line {
   }
 
   get slope() {
-    if (this.endA.y === this.endB.y) return undefined;
     return (this.endB.y - this.endA.y) / (this.endB.x - this.endA.x);
   }
 
@@ -74,7 +81,11 @@ class Line {
 
   hasPoint(point) {
     if (!(point instanceof Point)) return false;
-    return point.x === this.findX(point.y) || point.y === this.findY(point.x);
+    return (
+      areCollinear(this.endA, this.endB, point) &&
+      isNumberInRange(point.x, [this.endA.x, this.endB.x]) &&
+      isNumberInRange(point.y, [this.endA.y, this.endB.y])
+    );
   }
 
   findPointFromStart(distance) {
