@@ -38,7 +38,6 @@ class Line {
   }
 
   get slope() {
-    // console.log(this.endA.y == this.endB.y);
     if (this.endA.y === this.endB.y) return undefined;
     return (this.endB.y - this.endA.y) / (this.endB.x - this.endA.x);
   }
@@ -82,15 +81,8 @@ class Line {
   }
 
   hasPoint(point) {
-    if (
-      !(point instanceof Point) ||
-      this.slope * (this.endA.y - point.y) !== this.endA.x - point.x
-    )
-      return false;
-    return (
-      isNumberInRange(point.x, [this.endA.x, this.endB.x]) &&
-      isNumberInRange(point.y, [this.endA.y, this.endB.y])
-    );
+    if (!(point instanceof Point)) return false;
+    return point.x === this.findX(point.y) || point.y === this.findY(point.x);
   }
 
   findPointFromStart(distance) {

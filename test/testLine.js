@@ -240,6 +240,18 @@ describe('LINE', function() {
       const point = new Point(2, 3);
       assert.isFalse(line.hasPoint(point));
     });
+
+    it('should validate if the given point is on the x-axis', function() {
+      const line = new Line({ x: 0, y: 0 }, { x: 4, y: 0 });
+      const point = new Point(0, 0);
+      assert.isTrue(line.hasPoint(point));
+    });
+
+    it('should validate if the given point is on the y-axis', function() {
+      const line = new Line({ x: 0, y: 0 }, { x: 0, y: 4 });
+      const point = new Point(0, 0);
+      assert.isTrue(line.hasPoint(point));
+    });
   });
 
   describe('findPointFromStart', function() {
