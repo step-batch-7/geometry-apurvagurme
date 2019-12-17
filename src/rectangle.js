@@ -23,6 +23,12 @@ class Rectangle {
     const length = getLength(this.endB.y, this.endA.y);
     return length * breadth;
   }
+
+  get perimeter() {
+    const breadth = getBreadth(this.endB.x, this.endA.x);
+    const length = getLength(this.endB.y, this.endA.y);
+    return 2 * (length + breadth);
+  }
 }
 
 module.exports = Rectangle;

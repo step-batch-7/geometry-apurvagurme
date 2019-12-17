@@ -18,4 +18,12 @@ describe('RECTANGLE', function() {
       assert.strictEqual(point.area, expected);
     });
   });
+
+  describe('perimeter', function() {
+    it('should give the perimeter of the given rectangle', function() {
+      const point = new Rectangle({ x: 1, y: 1 }, { x: 2, y: 2 });
+      const expected = 4;
+      assert.strictEqual(point.perimeter, expected);
+    });
+  });
 });
