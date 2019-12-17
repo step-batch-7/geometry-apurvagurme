@@ -2,19 +2,19 @@ const Point = require('./point');
 
 class Circle {
   constructor(point, radius) {
-    this.point = new Point(point.x, point.y);
+    this.center = new Point(point.x, point.y);
     this.radius = radius;
   }
 
   toString() {
-    return `[Circle @(${this.point.x},${this.point.y}) radius ${this.radius}]`;
+    return `[Circle @(${this.center.x},${this.center.y}) radius ${this.radius}]`;
   }
 
   isEqualTo(other) {
     if (!(other instanceof Circle)) return false;
     return (
-      this.point.x == other.point.x &&
-      this.point.y == other.point.y &&
+      this.center.x == other.center.x &&
+      this.center.y == other.center.y &&
       this.radius == other.radius
     );
   }
@@ -28,7 +28,7 @@ class Circle {
   }
 
   hasPoint(point) {
-    const distance = this.point.findDistanceTo(point);
+    const distance = this.center.findDistanceTo(point);
     return distance == this.radius;
   }
 
@@ -37,7 +37,7 @@ class Circle {
   }
 
   covers(point) {
-    const distance = this.point.findDistanceTo(point);
+    const distance = this.center.findDistanceTo(point);
     return distance <= this.radius;
   }
 }

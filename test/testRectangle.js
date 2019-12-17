@@ -10,4 +10,12 @@ describe('RECTANGLE', function() {
       assert.strictEqual(point.toString(), expected);
     });
   });
+
+  describe('area', function() {
+    it('should give the area of the given rectangle', function() {
+      const point = new Rectangle({ x: 1, y: 1 }, { x: 2, y: 2 });
+      const expected = 1;
+      assert.strictEqual(point.area, expected);
+    });
+  });
 });
