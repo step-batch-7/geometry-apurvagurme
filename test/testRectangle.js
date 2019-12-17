@@ -28,10 +28,18 @@ describe('RECTANGLE', function() {
   });
 
   describe('isEqualTo', function() {
-    it('should validate when both rectangle given rectangle', function() {
+    it('should validate when both rectangle are equal', function() {
       const rectangle1 = new Rectangle({ x: 1, y: 1 }, { x: 2, y: 2 });
       const rectangle2 = new Rectangle({ x: 1, y: 1 }, { x: 2, y: 2 });
       assert.isTrue(rectangle1.isEqual(rectangle2));
+    });
+  });
+
+  describe('covers', function() {
+    it('should validate when point is in the rectangle', function() {
+      const rectangle1 = new Rectangle({ x: 1, y: 1 }, { x: 3, y: 3 });
+      const point = new Point(2, 2);
+      assert.isTrue(rectangle1.covers(point));
     });
   });
 });

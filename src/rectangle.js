@@ -1,5 +1,10 @@
 const Point = require('./point');
 
+const isNumberInRange = function(number, range) {
+  [min, max] = range.sort((a, b) => a - b);
+  return number >= min && number <= max;
+};
+
 const getBreadth = function(x1, x2) {
   return Math.abs(x1 - x2);
 };
@@ -33,6 +38,13 @@ class Rectangle {
   isEqual(other) {
     if (!(other instanceof Rectangle)) return false;
     return other.endA.isEqualTo(this.endA) && other.endB.isEqualTo(this.endB);
+  }
+
+  covers(point) {
+    return (
+      isNumberInRange(point.x, [this.endA.x, this.endB.x]) &&
+      isNumberInRange(point.y, [this.endA.y, this.endB.y])
+    );
   }
 }
 
