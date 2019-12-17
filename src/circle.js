@@ -29,7 +29,7 @@ class Circle {
 
   hasPoint(point) {
     const distance = this.point.findDistanceTo(point);
-    return distance == this.radius;
+    return distance == this.radius || distance < this.radius;
   }
 
   moveTo(point) {
