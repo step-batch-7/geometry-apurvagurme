@@ -52,4 +52,13 @@ describe('Circle', function() {
       assert.isTrue(circle.hasPoint(point));
     });
   });
+
+  describe('moveTo', function() {
+    it('should create a new circle of same dimensions at (1,1)', function() {
+      const circle1 = new Circle({ x: 0, y: 0 }, 2);
+      const circle2 = circle1.moveTo({ x: 1, y: 1 });
+      const circle3 = new Circle({ x: 1, y: 1 }, 2);
+      assert.isTrue(circle2.isEqualTo(circle3));
+    });
+  });
 });
