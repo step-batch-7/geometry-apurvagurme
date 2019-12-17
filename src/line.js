@@ -13,10 +13,6 @@ const getCoordinate = function(coordinates, distance, length) {
 };
 
 const areCollinear = function(point1, point2, point3) {
-  // return (
-  //   (point2.y - point1.y) * (point3.x - point2.x) ===
-  //   (point3.y - point2.y) * (point2.x - point1.x)
-  // );
   return (
     point1.x * (point2.y - point3.y) +
       point2.x * (point3.y - point1.y) +

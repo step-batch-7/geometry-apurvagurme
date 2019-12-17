@@ -14,6 +14,20 @@ const getLength = function(y1, y2) {
   return Math.abs(y1 - y2);
 };
 
+const getVerticesBAndD = function(vertexA, vertexC) {
+  const vertexB = new Point(vertexA.x, vertexC.y);
+  const vertexD = new Point(vertexC.x, vertexA.y);
+  return { vertexB, vertexD };
+};
+
+const getSides = function(vertexA, vertexB, vertexC, vertexD) {
+  const AB = new Line(vertexA, vertexB);
+  const BC = new Line(vertexB, vertexC);
+  const CD = new Line(vertexC, vertexD);
+  const DA = new Line(vertexD, vertexA);
+  return [AB, BC, CD, DA];
+};
+
 class Rectangle {
   constructor(point1, point2) {
     this.vertexA = new Point(point1.x, point1.y);
@@ -53,13 +67,9 @@ class Rectangle {
 
   hasPoint(point) {
     if (!(point instanceof Point)) return false;
-    const vertexB = new Point(this.vertexA.x, this.vertexC.y);
-    const vertexD = new Point(this.vertexC.x, this.vertexA.y);
-    const AB = new Line(this.vertexA, vertexB);
-    const BC = new Line(vertexB, this.vertexC);
-    const CD = new Line(this.vertexC, vertexD);
-    const DA = new Line(vertexD, this.vertexA);
-    return point.isOn(AB) || point.isOn(BC) || point.isOn(CD) || point.isOn(DA);
+    const { vertexB, vertexD } = getVerticesBAndD(this.vertexA, this.vertexC);
+    const sides = getSides(this.vertexA, vertexB, this.vertexC, vertexD);
+    return sides.some(side => point.isOn(side));
   }
 }
 
