@@ -14,6 +14,8 @@ const getCoordinate = function(coordinates, distance, length) {
   return (1 - distanceRatio) * coordinates[0] + distanceRatio * coordinates[1];
 };
 
+const arePointsCollinear = function() {};
+
 class Line {
   constructor(point1, point2) {
     this.endA = new Point(point1.x, point1.y);
@@ -36,6 +38,8 @@ class Line {
   }
 
   get slope() {
+    // console.log(this.endA.y == this.endB.y);
+    if (this.endA.y === this.endB.y) return undefined;
     return (this.endB.y - this.endA.y) / (this.endB.x - this.endA.x);
   }
 
@@ -55,7 +59,7 @@ class Line {
     return (yCoordinate - yIntercept) / slope;
   }
 
-  isParallel(other) {
+  isParallelTo(other) {
     if (other instanceof Line) {
       const yInterceptOfA = getYIntercept(this.endA.x, this.endA.y, this.slope);
       const yInterceptOfB = getYIntercept(
@@ -78,9 +82,11 @@ class Line {
   }
 
   hasPoint(point) {
-    if (!(point instanceof Point)) return false;
-    const yIntercept = getYIntercept(this.endA.x, this.endA.y, this.slope);
-    if (point.y != this.slope * point.x + yIntercept) return false;
+    if (
+      !(point instanceof Point) ||
+      this.slope * (this.endA.y - point.y) !== this.endA.x - point.x
+    )
+      return false;
     return (
       isNumberInRange(point.x, [this.endA.x, this.endB.x]) &&
       isNumberInRange(point.y, [this.endA.y, this.endB.y])
@@ -94,9 +100,7 @@ class Line {
   }
 
   findPointFromEnd(distance) {
-    const x = getCoordinate([this.endB.x, this.endA.x], distance, this.length);
-    const y = getCoordinate([this.endB.y, this.endA.y], distance, this.length);
-    return new Point(x, y);
+    return this.findPointFromStart(this.length - distance);
   }
 }
 

@@ -103,10 +103,22 @@ describe('POINT', function() {
   });
 
   describe('isOn', function() {
-    it('should validate if the given point is on the given line or not', function() {
+    it('should validate if the given point is endPoint of the given line', function() {
       const point = new Point(1, 2);
       const line = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       assert.isTrue(point.isOn(line));
+    });
+
+    it('should validate when the point is not on the line', function() {
+      const line = new Line({ x: 2, y: 2 }, { x: 4, y: 4 });
+      const point = new Point(3, 3);
+      assert.isTrue(point.isOn(line));
+    });
+
+    it('should invalidate when the point is not on the line', function() {
+      const line = new Line({ x: 0, y: 0 }, { x: 0, y: 4 });
+      const point = new Point(0, 5);
+      assert.isFalse(point.isOn(line));
     });
   });
 });

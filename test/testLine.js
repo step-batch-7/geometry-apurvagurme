@@ -84,7 +84,7 @@ describe('LINE', function() {
 
     it('should give slope of line as zero when the given line is parallel to X-axis', function() {
       const line = new Line({ x: 0, y: 0 }, { x: 4, y: 0 });
-      assert.strictEqual(line.slope, 0);
+      assert.strictEqual(line.slope, undefined);
     });
 
     it('should give slope of line as Infinity when the given line is parallel to Y-axis', function() {
@@ -98,34 +98,34 @@ describe('LINE', function() {
     });
   });
 
-  describe('isParallel', function() {
+  describe('isParallelTo', function() {
     it('should validate when given lines are parallel', function() {
       const line1 = new Line({ x: 0, y: 0 }, { x: 6, y: 0 });
       const line2 = new Line({ x: 0, y: 4 }, { x: 6, y: 4 });
-      assert.isTrue(line1.isParallel(line2));
+      assert.isTrue(line1.isParallelTo(line2));
     });
 
     it('should invalidate if given lines are not parallel', function() {
       const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
       const line2 = new Line({ x: 0, y: 1 }, { x: 5, y: 10 });
-      assert.isFalse(line1.isParallel(line2));
+      assert.isFalse(line1.isParallelTo(line2));
     });
 
     it('should invalidate when given lines are equal', function() {
       const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
       const line2 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
-      assert.isFalse(line1.isParallel(line2));
+      assert.isFalse(line1.isParallelTo(line2));
     });
 
     it('should invalidate when other line is not an instance of Line class', function() {
       const line1 = new Line({ x: 0, y: 2 }, { x: 4, y: 10 });
       const line2 = 'not a line';
-      assert.isFalse(line1.isParallel(line2));
+      assert.isFalse(line1.isParallelTo(line2));
     });
 
     it('should invalidate when same line is given', function() {
       const line1 = new Line({ x: 0, y: 0 }, { x: 1, y: 1 });
-      assert.isFalse(line1.isParallel(line1));
+      assert.isFalse(line1.isParallelTo(line1));
     });
   });
 
