@@ -1,9 +1,5 @@
 const Point = require('./point');
 
-const getYIntercept = function(x, y, slope) {
-  return y - slope * x;
-};
-
 const isNumberInRange = function(number, range) {
   [min, max] = range.sort((a, b) => a - b);
   return number >= min && number <= max;
@@ -47,20 +43,18 @@ class Line {
     return (this.endB.y - this.endA.y) / (this.endB.x - this.endA.x);
   }
 
-  findY(xCoordinate) {
-    if (!isNumberInRange(xCoordinate, [this.endA.x, this.endB.x])) return NaN;
+  findY(x) {
+    if (!isNumberInRange(x, [this.endA.x, this.endB.x])) return NaN;
     if (this.endA.x == this.endB.x) return this.endA.y;
-    const slope = this.slope;
-    const yIntercept = getYIntercept(this.endA.x, this.endA.y, this.slope);
-    return slope * xCoordinate + yIntercept;
+    const dx = this.endA.x - x;
+    return this.endA.y - this.slope * dx;
   }
 
-  findX(yCoordinate) {
-    if (!isNumberInRange(yCoordinate, [this.endA.y, this.endB.y])) return NaN;
+  findX(y) {
+    if (!isNumberInRange(y, [this.endA.y, this.endB.y])) return NaN;
     if (this.endA.y == this.endB.y) return this.endA.x;
-    const slope = this.slope;
-    const yIntercept = getYIntercept(this.endA.x, this.endA.y, this.slope);
-    return (yCoordinate - yIntercept) / slope;
+    const dy = this.endA.y - y;
+    return this.endA.x - this.slope / dy;
   }
 
   isParallelTo(other) {
