@@ -51,12 +51,6 @@ describe('Circle', function() {
       const point = new Point(0, 2);
       assert.isTrue(circle.hasPoint(point));
     });
-
-    it('should validate if given point is in the circle', function() {
-      const circle = new Circle({ x: 0, y: 0 }, 2);
-      const point = new Point(0, 1);
-      assert.isTrue(circle.hasPoint(point));
-    });
   });
 
   describe('moveTo', function() {
@@ -65,6 +59,20 @@ describe('Circle', function() {
       const circle2 = circle1.moveTo({ x: 1, y: 1 });
       const circle3 = new Circle({ x: 1, y: 1 }, 2);
       assert.isTrue(circle2.isEqualTo(circle3));
+    });
+  });
+
+  describe('covers', function() {
+    it('should validate if given point is in the circle', function() {
+      const circle = new Circle({ x: 0, y: 0 }, 2);
+      const point = new Point(0, 1);
+      assert.isTrue(circle.covers(point));
+    });
+
+    it('should validate if given point is in the circle', function() {
+      const circle = new Circle({ x: 0, y: 0 }, 2);
+      const point = new Point(0, 3);
+      assert.isFalse(circle.covers(point));
     });
   });
 });
