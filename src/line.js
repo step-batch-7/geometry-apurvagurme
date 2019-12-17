@@ -14,7 +14,12 @@ const getCoordinate = function(coordinates, distance, length) {
   return (1 - distanceRatio) * coordinates[0] + distanceRatio * coordinates[1];
 };
 
-const arePointsCollinear = function() {};
+const areCollinear = function(point1, point2, point3) {
+  return (
+    (point2.y - point1.y) * (point3.x - point2.x) ===
+    (point3.y - point2.y) * (point2.x - point1.x)
+  );
+};
 
 class Line {
   constructor(point1, point2) {
@@ -59,16 +64,9 @@ class Line {
   }
 
   isParallelTo(other) {
-    if (other instanceof Line) {
-      const yInterceptOfA = getYIntercept(this.endA.x, this.endA.y, this.slope);
-      const yInterceptOfB = getYIntercept(
-        other.endA.x,
-        other.endA.y,
-        other.slope
-      );
-      if (yInterceptOfA != yInterceptOfB) return this.slope == other.slope;
-    }
-    return false;
+    if (!(other instanceof Line) || this == other) return false;
+    if (areCollinear(this.endA, this.endB, other.endA)) return false;
+    return this.slope == other.slope;
   }
 
   split() {
