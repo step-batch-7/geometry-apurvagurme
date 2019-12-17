@@ -74,5 +74,11 @@ describe('Circle', function() {
       const point = new Point(0, 3);
       assert.isFalse(circle.covers(point));
     });
+
+    it('should invalidate if given point is on the circle', function() {
+      const circle = new Circle({ x: 0, y: 0 }, 2);
+      const point = new Point(0, 2);
+      assert.isFalse(circle.covers(point));
+    });
   });
 });

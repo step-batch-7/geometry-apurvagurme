@@ -38,7 +38,7 @@ class Circle {
 
   covers(point) {
     const distance = this.center.findDistanceTo(point);
-    return distance <= this.radius;
+    return distance < this.radius;
   }
 }
 

@@ -50,13 +50,14 @@ class Rectangle {
 
   hasPoint(point) {
     if (!(point instanceof Point)) return false;
-    const AB = new Line({ x: this.endA.x, y: this.endB.y }, this.endB);
-    const BC = new Line(this.endB, { x: this.endB.x, y: this.endA.y });
-    const CD = new Line(
-      { x: this.endB.x, y: this.endA.y },
-      { x: this.endA.x, y: this.endA.y }
-    );
-    const DA = new Line(this.endA, { x: this.endA.x, y: this.endB.y });
+    const vertexA = new Point(this.endA.x, this.endB.y);
+    const vertexC = new Point(this.endB.x, this.endA.y);
+    const vertexB = this.endB;
+    const vertexD = this.endA;
+    const AB = new Line(vertexA, vertexB);
+    const BC = new Line(vertexB, vertexC);
+    const CD = new Line(vertexC, vertexD);
+    const DA = new Line(vertexD, vertexA);
     return point.isOn(AB) || point.isOn(BC) || point.isOn(CD) || point.isOn(DA);
   }
 }
