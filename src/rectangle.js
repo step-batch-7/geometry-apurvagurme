@@ -1,11 +1,11 @@
 const Point = require('./point');
 
 const getBreadth = function(x1, x2) {
-  return x1 - x2;
+  return Math.abs(x1 - x2);
 };
 
 const getLength = function(y1, y2) {
-  return y1 - y2;
+  return Math.abs(y1 - y2);
 };
 
 class Rectangle {
@@ -28,6 +28,11 @@ class Rectangle {
     const breadth = getBreadth(this.endB.x, this.endA.x);
     const length = getLength(this.endB.y, this.endA.y);
     return 2 * (length + breadth);
+  }
+
+  isEqual(other) {
+    if (!(other instanceof Rectangle)) return false;
+    return other.endA.isEqualTo(this.endA) && other.endB.isEqualTo(this.endB);
   }
 }
 
