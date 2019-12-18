@@ -27,7 +27,6 @@ const getSides = function(vertexA, vertexB, vertexC, vertexD) {
   const DA = new Line(vertexD, vertexA);
   return [AB, BC, CD, DA];
 };
-
 class Rectangle {
   constructor(point1, point2) {
     this.vertexA = new Point(point1.x, point1.y);
@@ -50,7 +49,7 @@ class Rectangle {
     return 2 * (length + breadth);
   }
 
-  isEqual(other) {
+  isEqualTo(other) {
     if (!(other instanceof Rectangle)) return false;
     return (
       other.vertexA.isEqualTo(this.vertexA) &&

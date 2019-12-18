@@ -31,7 +31,7 @@ describe('RECTANGLE', function() {
     it('should validate when both rectangle are equal', function() {
       const rectangle1 = new Rectangle({ x: 1, y: 1 }, { x: 2, y: 2 });
       const rectangle2 = new Rectangle({ x: 1, y: 1 }, { x: 2, y: 2 });
-      assert.isTrue(rectangle1.isEqual(rectangle2));
+      assert.isTrue(rectangle1.isEqualTo(rectangle2));
     });
   });
 
