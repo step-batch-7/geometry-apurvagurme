@@ -282,6 +282,21 @@ describe('LINE', function() {
       const point = new Point(1, 2);
       assert.deepStrictEqual(line.findPointFromStart(0), point);
     });
+
+    it('should give null when given distance is greater than the length of the given line', function() {
+      const line = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
+      assert.deepStrictEqual(line.findPointFromStart(5), null);
+    });
+
+    it('should give null when given distance is 0', function() {
+      const line = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
+      assert.deepStrictEqual(line.findPointFromStart(5), null);
+    });
+
+    it('should give null when given distance is less than 0', function() {
+      const line = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
+      assert.deepStrictEqual(line.findPointFromStart(5), null);
+    });
   });
 
   describe('findPointFromEnd', function() {
