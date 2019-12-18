@@ -17,6 +17,12 @@ describe('Circle', function() {
       const circle2 = new Circle({ x: 1, y: 2 }, 5);
       assert.isTrue(circle1.isEqualTo(circle2));
     });
+
+    it('should invalidate when given point is not the instance of point', () => {
+      const circle = new Circle({ x: 0, y: 0 }, { x: 2, y: 2 });
+      const point = { x: 2, y: 2 };
+      assert.isFalse(circle.isEqualTo(point));
+    });
   });
 
   describe('area', function() {
@@ -51,6 +57,12 @@ describe('Circle', function() {
       const point = new Point(0, 2);
       assert.isTrue(circle.hasPoint(point));
     });
+
+    it('should invalidate when given point is not the instance of point', () => {
+      const circle = new Circle({ x: 0, y: 0 }, { x: 2, y: 2 });
+      const point = { x: 2, y: 2 };
+      assert.isFalse(circle.hasPoint(point));
+    });
   });
 
   describe('moveTo', function() {
@@ -78,6 +90,12 @@ describe('Circle', function() {
     it('should invalidate if given point is on the circle', function() {
       const circle = new Circle({ x: 0, y: 0 }, 2);
       const point = new Point(0, 2);
+      assert.isFalse(circle.covers(point));
+    });
+
+    it('should invalidate when given point is not the instance of point', () => {
+      const circle = new Circle({ x: 0, y: 0 }, { x: 2, y: 2 });
+      const point = { x: 2, y: 2 };
       assert.isFalse(circle.covers(point));
     });
   });

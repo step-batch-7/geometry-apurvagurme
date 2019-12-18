@@ -53,6 +53,12 @@ describe('LINE', function() {
       const line2 = new Line({ x: 3, y: 4 }, { x: 1, y: 2 });
       assert.isTrue(line1.isEqualTo(line2));
     });
+
+    it('should invalidate when given point is not the instance of point', () => {
+      const line = new Line({ x: 0, y: 0 }, { x: 2, y: 2 });
+      const point = { x: 2, y: 2 };
+      assert.isFalse(line.isEqualTo(point));
+    });
   });
 
   describe('length', function() {
