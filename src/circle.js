@@ -28,6 +28,7 @@ class Circle {
   }
 
   hasPoint(point) {
+    if (!(point instanceof Point)) return false;
     const distance = this.center.findDistanceTo(point);
     return distance == this.radius;
   }
@@ -37,6 +38,7 @@ class Circle {
   }
 
   covers(point) {
+    if (!(point instanceof Point)) return false;
     const distance = this.center.findDistanceTo(point);
     return distance < this.radius;
   }

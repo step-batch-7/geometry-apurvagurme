@@ -77,6 +77,12 @@ describe('POINT', function() {
       assert.strictEqual(point1.findDistanceTo(point2), 5);
     });
 
+    it('should give NaN if given object is not an instance of point', function() {
+      const point1 = new Point(0, 0);
+      const point2 = { x: 0, y: 5 };
+      assert.isNaN(point1.findDistanceTo(point2));
+    });
+
     it('should give the distance zero if the points are equal', function() {
       const point1 = new Point(3, 4);
       const point2 = new Point(3, 4);

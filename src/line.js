@@ -35,7 +35,10 @@ class Line {
 
   isEqualTo(other) {
     if (!(other instanceof Line)) return false;
-    return this.endA.isEqualTo(other.endA) && this.endB.isEqualTo(other.endB);
+    return (
+      (this.endA.isEqualTo(other.endA) && this.endB.isEqualTo(other.endB)) ||
+      (this.endA.isEqualTo(other.endB) && this.endB.isEqualTo(other.endA))
+    );
   }
 
   get length() {
@@ -48,16 +51,15 @@ class Line {
 
   findY(x) {
     if (!isNumberInRange(x, [this.endA.x, this.endB.x])) return NaN;
-    if (this.endA.x == this.endB.x) return this.endA.y;
+    if (this.slope === Infinity || this.slope === -Infinity) return this.endA.y;
     const dx = this.endA.x - x;
     return this.endA.y - this.slope * dx;
   }
 
   findX(y) {
     if (!isNumberInRange(y, [this.endA.y, this.endB.y])) return NaN;
-    if (this.endA.y == this.endB.y) return this.endA.x;
-    const dy = this.endA.y - y;
-    return this.endA.x - this.slope / dy;
+    if (this.slope == 0) return this.endA.x;
+    return (y - this.endA.y) / this.slope + this.endA.x;
   }
 
   isParallelTo(other) {

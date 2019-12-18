@@ -47,6 +47,12 @@ describe('LINE', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       assert.isTrue(line1.isEqualTo(line1));
     });
+
+    it('should validate when same lines are given in reverse', function() {
+      const line1 = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
+      const line2 = new Line({ x: 3, y: 4 }, { x: 1, y: 2 });
+      assert.isTrue(line1.isEqualTo(line2));
+    });
   });
 
   describe('length', function() {
@@ -170,6 +176,16 @@ describe('LINE', function() {
     it('should give the first X coordinate if the line is parallel to Y-axis', function() {
       const line1 = new Line({ x: 1, y: 0 }, { x: 2, y: 0 });
       assert.deepStrictEqual(line1.findX(0), 1);
+    });
+
+    it('Should give starting point of x when starting point of y is given ', () => {
+      const line = new Line({ x: 2, y: 1 }, { x: 3, y: 2 });
+      assert.strictEqual(line.findX(1), 2);
+    });
+
+    it('Should give ending point x when ending point of y is given ', () => {
+      const line = new Line({ x: 2, y: 1 }, { x: 3, y: 2 });
+      assert.strictEqual(line.findX(2), 3);
     });
   });
 

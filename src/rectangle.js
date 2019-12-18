@@ -27,6 +27,7 @@ const getSides = function(vertexA, vertexB, vertexC, vertexD) {
   const DA = new Line(vertexD, vertexA);
   return [AB, BC, CD, DA];
 };
+
 class Rectangle {
   constructor(point1, point2) {
     this.vertexA = new Point(point1.x, point1.y);
@@ -58,6 +59,7 @@ class Rectangle {
   }
 
   covers(point) {
+    if (!(point instanceof Point)) return false;
     return (
       isNumberInRange(point.x, [this.vertexA.x, this.vertexC.x]) &&
       isNumberInRange(point.y, [this.vertexA.y, this.vertexC.y])
