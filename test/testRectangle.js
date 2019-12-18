@@ -63,6 +63,12 @@ describe('RECTANGLE', function() {
       const rectangle1 = new Rectangle({ x: 10, y: 11 }, { x: 12, y: 13 });
       assert.isTrue(rectangle1.isEqualTo(rectangle1));
     });
+
+    it('Should give true if other diagonal of same rectangle is given', () => {
+      const rectangle1 = new Rectangle({ x: 0, y: 2 }, { x: 4, y: 0 });
+      const rectangle2 = new Rectangle({ x: 4, y: 2 }, { x: 0, y: 0 });
+      assert.ok(rectangle1.isEqualTo(rectangle2));
+    });
   });
 
   describe('covers', function() {
@@ -81,6 +87,12 @@ describe('RECTANGLE', function() {
     it('should invalidate when points is on the rectangle', () => {
       const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 2, y: 2 });
       const point = new Point(2, 2);
+      assert.isFalse(rectangle.covers(point));
+    });
+
+    it('should invalidate when given point is not the instance of point', () => {
+      const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 2, y: 2 });
+      const point = { x: 2, y: 2 };
       assert.isFalse(rectangle.covers(point));
     });
   });
@@ -108,6 +120,12 @@ describe('RECTANGLE', function() {
       const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
       const point = new Point(3, 1);
       assert.isTrue(rectangle.hasPoint(point));
+    });
+
+    it('should invalidate when given point is not the instance of point', () => {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const point = { x: 3, y: 1 };
+      assert.isFalse(rectangle.covers(point));
     });
   });
 });

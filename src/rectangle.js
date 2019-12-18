@@ -52,9 +52,15 @@ class Rectangle {
 
   isEqualTo(other) {
     if (!(other instanceof Rectangle)) return false;
+    const diagonal1 = new Line(this.vertexA, this.vertexC);
+    const { vertexB, vertexD } = getVerticesBAndD(this.vertexA, this.vertexC);
+    const diagonal2 = new Line(vertexB, vertexD);
+    const otherDiagonal = new Line(other.vertexA, other.vertexC);
     return (
-      other.vertexA.isEqualTo(this.vertexA) &&
-      other.vertexC.isEqualTo(this.vertexC)
+      diagonal1.isEqualTo(otherDiagonal) ||
+      diagonal2.isEqualTo(otherDiagonal) ||
+      (other.vertexA.isEqualTo(this.vertexA) &&
+        other.vertexC.isEqualTo(this.vertexC))
     );
   }
 
