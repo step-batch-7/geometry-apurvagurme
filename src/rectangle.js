@@ -3,7 +3,7 @@ const Line = require('./line');
 
 const isNumberInRange = function(number, range) {
   [min, max] = range.sort((a, b) => a - b);
-  return number >= min && number <= max;
+  return number > min && number < max;
 };
 
 const getBreadth = function(x1, x2) {

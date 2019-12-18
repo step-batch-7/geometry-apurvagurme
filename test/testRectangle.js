@@ -15,7 +15,12 @@ describe('RECTANGLE', function() {
     it('should give the area of the given rectangle', function() {
       const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 2, y: 2 });
       const expected = 1;
-      assert.strictEqual(rectangle.area, expected);
+      assert.deepStrictEqual(rectangle.area, expected);
+    });
+
+    it('should give area when  coordinates are negative', function() {
+      const rectangle1 = new Rectangle({ x: 2, y: 3 }, { x: -3, y: -5 });
+      assert.deepStrictEqual(rectangle1.area, 40);
     });
   });
 
@@ -23,7 +28,12 @@ describe('RECTANGLE', function() {
     it('should give the perimeter of the given rectangle', function() {
       const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 2, y: 2 });
       const expected = 4;
-      assert.strictEqual(rectangle.perimeter, expected);
+      assert.deepStrictEqual(rectangle.perimeter, expected);
+    });
+
+    it('should give perimeter when  coordinates are negative', function() {
+      const rectangle1 = new Rectangle({ x: 2, y: 3 }, { x: -3, y: -5 });
+      assert.deepStrictEqual(rectangle1.perimeter, 26);
     });
   });
 
@@ -60,6 +70,18 @@ describe('RECTANGLE', function() {
       const rectangle1 = new Rectangle({ x: 1, y: 1 }, { x: 3, y: 3 });
       const point = new Point(2, 2);
       assert.isTrue(rectangle1.covers(point));
+    });
+
+    it('should invalidate when points are outside the rectangle', () => {
+      const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 2, y: 2 });
+      const point = new Point(4, 4);
+      assert.isFalse(rectangle.covers(point));
+    });
+
+    it('should invalidate when points is on the rectangle', () => {
+      const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 2, y: 2 });
+      const point = new Point(2, 2);
+      assert.isFalse(rectangle.covers(point));
     });
   });
 
