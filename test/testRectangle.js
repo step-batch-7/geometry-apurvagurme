@@ -33,6 +33,26 @@ describe('RECTANGLE', function() {
       const rectangle2 = new Rectangle({ x: 1, y: 1 }, { x: 2, y: 2 });
       assert.isTrue(rectangle1.isEqualTo(rectangle2));
     });
+
+    it('should invalidate when the two instances not equal', () => {
+      const rectangle1 = new Rectangle({ x: 10, y: 11 }, { x: 12, y: 13 });
+      const rectangle2 = new Rectangle({ x: 10, y: 12 }, { x: 12, y: 13 });
+      assert.isFalse(rectangle1.isEqualTo(rectangle2));
+    });
+
+    it('should invalidate when one rectangle1 is not an instance of Rectangle class', () => {
+      const rectangle1 = new Rectangle({ x: 10, y: 11 }, { x: 12, y: 13 });
+      const rectangle2 = {
+        vertexA: { x: 10, y: 11 },
+        vertexB: { x: 12, y: 13 }
+      };
+      assert.isFalse(rectangle1.isEqualTo(rectangle2));
+    });
+
+    it('should validate when the two instances given are equal', () => {
+      const rectangle1 = new Rectangle({ x: 10, y: 11 }, { x: 12, y: 13 });
+      assert.isTrue(rectangle1.isEqualTo(rectangle1));
+    });
   });
 
   describe('covers', function() {
