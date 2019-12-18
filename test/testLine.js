@@ -139,6 +139,12 @@ describe('LINE', function() {
       const line1 = new Line({ x: 0, y: 0 }, { x: 1, y: 1 });
       assert.isFalse(line1.isParallelTo(line1));
     });
+
+    it('Should give true if line is parallel to y-axis', function() {
+      const line1 = new Line({ x: 0, y: 0 }, { x: 0, y: 1 });
+      const line2 = new Line({ x: 1, y: 0 }, { x: 1, y: -2 });
+      assert.ok(line1.isParallelTo(line2));
+    });
   });
 
   describe('findY', function() {
